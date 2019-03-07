@@ -1,0 +1,87 @@
+INSTRUCCIONES DE IMPRESIÓN DE ADOBE INDESIGN PARA EL INFORME DEL PROVEEDOR DE SERVICIOS
+
+NOMBRE DEL DOCUMENTO: MVP.indd
+
+FECHA DEL PAQUETE: 07/03/2019 17:07
+Fecha de creación: 07/03/2019
+Fecha de modificación: 07/03/2019
+
+INFORMACIÓN DE CONTACTO
+
+Nombre de la empresa: 
+Contacto: 
+Dirección: 
+
+
+
+
+
+Teléfono: 
+Fax: 
+Correo electrónico: 
+
+INSTRUCCIONES ESPECIALES Y OTRAS NOTAS
+
+
+
+
+
+
+Plugins externos 0
+Objetos no opacos: En la página, A
+
+FUENTES
+2 fuente(s) utilizada(s); 0 No disponibles, 0 Incrustado, 0 incompleta(s), 0 protegida(s)
+
+Fuentes empaquetadas
+- Nombre: Roboto-Medium; Tipo: TrueType, Estado: OK
+- Nombre: Roboto-Regular; Tipo: TrueType, Estado: OK
+
+
+COLORES Y TINTAS
+4 tinta(s) de cuatricromía; 0 tinta(s) plana(s)
+
+- Nombre y tipo: Cian de cuatricromía; Ángulo: 0,000; Líneas/pulgada: 0,000
+- Nombre y tipo: Magenta de cuatricromía; Ángulo: 0,000; Líneas/pulgada: 0,000
+- Nombre y tipo: Amarillo de cuatricromía; Ángulo: 0,000; Líneas/pulgada: 0,000
+- Nombre y tipo: Negro de cuatricromía; Ángulo: 0,000; Líneas/pulgada: 0,000
+
+
+VÍNCULOS E IMÁGENES
+(Sólo vínculos incrustados y que faltan)
+Vínculos e imágenes: 1 vínculo(s) encontrado(s); 0 modificado(s), 0 No disponibles, 0 inaccesible(s)
+Imágenes: 0 Incrustado, 1 con espacio de color RGB
+
+
+CONFIGURACIÓN DE IMPRESIÓN
+PPD: N/D, (Microsoft Print to PDF)
+Imprimir en: Impresora
+Número de copias: 1
+Páginas enfrentadas: No
+Páginas pares/impares: Ambas
+Páginas: Todas
+Prueba: No
+Mosaico: Ninguno
+Escala: 100%, 100%
+Posición de la página: Superior izquierda
+Imprimir capas: Capas visibles, imprimibles
+Marcas de impresión: Ninguna
+Sangrado: 0 mm, 0 mm, 0 mm, 0 mm
+Color: RGB compuesto
+Modo de reventado: Ninguno
+Enviar datos de la imagen: Submuestreo optimizado
+Sustitución de imagen OPI/DCS: No
+Tamaño de página: A4
+Dimensiones del papel: 210 mm x 297 mm
+Orientación: Vertical
+Negativo: No
+Modo de volteo: Desactivado
+
+
+LISTA DEL PAQUETE DE ARCHIVOS
+
+1. MVP.indd; tipo: Documento de Adobe InDesign; tamaño: 2028K
+2. MVP.idml; tipo: Documento InDesign Markup; tamaño: 88K
+3. MVP.pdf; tipo: Documento Adobe Acrobat; tamaño: 59K
+4. Roboto-Medium.ttf; tipo: Archivo de fuentes; tamaño: 168K
+5. Roboto-Regular.ttf; tipo: Archivo de fuentes; tamaño: 167K
