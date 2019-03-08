@@ -15,8 +15,8 @@ const router = express.Router();
 
 router.get('/jobs', checkJwtToken, getJobInfo);
 
-router.post('team/jobs', checkJwtToken, createJob);
-router.delete('team/jobs', checkJwtToken, deleteJob);
+router.post('/team/jobs', checkJwtToken, createJob);
+router.delete('/team/jobs', checkJwtToken, deleteJob);
 router.get('/team/jobs', checkJwtToken, viewApplicants);
 router.patch('/team/jobs', checkJwtToken, deleteApplicants);
 

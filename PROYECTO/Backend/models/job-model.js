@@ -5,9 +5,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const jobSchema = new Schema({
-  jobUuid: String,
-  jobTitle: String,
-  jobDescription: String,
+  team: ObjectId,
+  uuid: String,
+  title: String,
+  description: String,
   createdAt: Date,
   tags: [],
   applicants: [],

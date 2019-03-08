@@ -12,7 +12,7 @@ const playerSchema = new Schema({
     fullName: String,
     nickName: String,
     description: String,
-    rrss: {
+    social: {
       twitterUrl: String,
       twichUrl: String,
       instagramUrl: String,
@@ -21,8 +21,8 @@ const playerSchema = new Schema({
   accountInfo: {
     email: String,
     password: String,
-    created_at: Date,
-    activated_at: Date,
+    createdAt: Date,
+    activatedAt: Date,
     uuid: {
       type: String,
       unique: true,
@@ -34,8 +34,18 @@ const playerSchema = new Schema({
   team: String,
 
   background: {
-    experience: [experienceModel],
-    education: [educationModel],
+    experience: [{
+      company: String,
+      job: String,
+      dateStart: Date,
+      dateEnd: Date,
+    }],
+    education: [{
+      school: String,
+      degree: String,
+      dateStart: Date,
+      dateEnd: Date,
+    }],
   },
 });
 

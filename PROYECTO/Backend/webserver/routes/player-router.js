@@ -15,6 +15,6 @@ const router = express.Router();
 router.get('/player', checkJwtToken, getPlayerProfile);
 router.put('/player', checkJwtToken, updatePlayerProfile);
 router.post('/player/avatar', checkJwtToken, upload.single('avatar'), uploadAvatar);
-router.put('/player/background', checkJwtToken, uploadBackground);
+router.put('/player/background', checkJwtToken, updateBackground);
 
 module.exports = router;
