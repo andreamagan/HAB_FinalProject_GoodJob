@@ -7,7 +7,7 @@ const getPlayerProfile = require();
 const checkJwtToken = require();
 const updatePlayerProfile = require();
 const uploadAvatar = require();
-const uploadBackground = require();
+const updateBackground = require();
 
 const upload = multer();
 const router = express.Router();

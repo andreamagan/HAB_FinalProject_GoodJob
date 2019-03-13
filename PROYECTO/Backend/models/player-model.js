@@ -2,8 +2,6 @@
 
 const mongoose = require('mongoose');
 
-const experienceModel = require('./experience-player-model');
-const educationModel = require('./education-player-model');
 
 const { Schema } = mongoose;
 

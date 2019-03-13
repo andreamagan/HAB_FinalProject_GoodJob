@@ -6,6 +6,14 @@ const mongoPool = require('./databases/mongo-pool');
 
 const httpServerConfig = process.env.PORT;
 
+process.on('uncaughtException', (err) => {
+  console.error('excepción inesperada', err.message, err);
+});
+
+process.on('unhandledRejection', (err) => {
+  console.error('Error inesperado', err.message, err);
+});
+
 (async function initApp() {
   try {
     await mongoPool.connect();
