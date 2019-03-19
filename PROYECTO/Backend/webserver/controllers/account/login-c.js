@@ -1,16 +1,16 @@
 'use strict';
 
-const loginUC = require('../../../domain/use-cases/account/login-uc');
+const loginUC = require('../../../domain/use-cases/accounts/login-uc');
 
-async function login(req, res, next) {
+async function loginController(req, res, next) {
   const credentials = { ...req.body };
 
   try {
-    await loginUC(credentials);
-    return res.status(200).send();
+    const response = await loginUC(credentials);
+    return res.status(200).send(response);
   } catch (e) {
     return next(e);
   }
 }
 
-module.exports = login;
+module.exports = loginController;

@@ -21,6 +21,7 @@ const playerSchema = new Schema({
     password: String,
     createdAt: Date,
     activatedAt: Date,
+    verificationCode: String,
     uuid: {
       type: String,
       unique: true,

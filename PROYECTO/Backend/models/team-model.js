@@ -10,7 +10,7 @@ const teamSchema = new Schema({
     fullNameTeam: String,
     shortName: String,
     description: String,
-    rrss: {
+    social: {
       twitterUrl: String,
       twichUrl: String,
       instagramUrl: String,
@@ -20,8 +20,9 @@ const teamSchema = new Schema({
   accountInfo: {
     email: String,
     password: String,
-    created_at: Date,
-    activated_at: Date,
+    createdAt: Date,
+    activatedAt: Date,
+    verificationCode: String,
     uuid: {
       type: String,
       unique: true,
