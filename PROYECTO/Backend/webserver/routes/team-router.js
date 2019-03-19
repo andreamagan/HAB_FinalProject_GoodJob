@@ -3,17 +3,17 @@
 const express = require('express');
 const multer = require('multer');
 
-const getTeamProfile = require();
-const checkJwtToken = require();
-const updateTeamProfile = require();
+const getTeamProfile = require('../controllers/users/get-user-profile-c');
+const updateTeamProfile = require('../controllers/users/teams/update-team-profile-c');
+
 const uploadAvatar = require();
 
 const upload = multer();
 const router = express.Router();
 
-router.get('/team', checkJwtToken, getTeamProfile);
-router.put('/team', checkJwtToken, updateTeamProfile);
-router.post('/team/avatar', checkJwtToken, upload.single('avatar'), uploadAvatar);
+router.get('/team', getTeamProfile);
+router.put('/team', updateTeamProfile);
+router.post('/team/avatar', upload.single('avatar'), uploadAvatar);
 
 
 module.exports = router;
