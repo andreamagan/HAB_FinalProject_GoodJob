@@ -5,8 +5,8 @@ const multer = require('multer');
 
 const getTeamProfile = require('../controllers/users/get-user-profile-c');
 const updateTeamProfile = require('../controllers/users/teams/update-team-profile-c');
+const uploadAvatar = require('../controllers/users/teams/update-team-avatar-c');
 
-const uploadAvatar = require();
 
 const upload = multer();
 const router = express.Router();

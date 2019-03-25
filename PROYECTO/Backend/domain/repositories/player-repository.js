@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt');
 const cloudinary = require('cloudinary');
 const dot = require('dot-object');
 
-const TeamModel = require('../../../models/team-model');
+const PlayerModel = require('../../models/player-model');
 
-const createNotFoundDataError = require('../../use-cases/errors/not-found-error');
+const createNotFoundDataError = require('../use-cases/errors/not-found-error');
 
 async function insertUserAccountInDB(userData) {
   const now = new Date().toISOString().substring(0, 19).replace('T', ' ');
@@ -14,16 +14,15 @@ async function insertUserAccountInDB(userData) {
     uuid, email, securePassword, verificationCode, role,
   } = userData;
 
-  const teamProfileData = {
-    teamInfo: {
-      fullNameTeam: null,
-      shortName: null,
+  const playerProfileData = {
+    personalInfo: {
+      fullName: null,
+      nickName: null,
       description: null,
-      rrss: {
+      social: {
         twitterUrl: null,
         twichUrl: null,
         instagramUrl: null,
-        webUrl: null,
       },
     },
     accountInfo: {
@@ -37,21 +36,38 @@ async function insertUserAccountInDB(userData) {
     },
     tags: [],
     avatarUrl: null,
+    team: null,
 
-    players: [],
+    background: {
+      experience: [{
+        company: null,
+        job: null,
+        dateStart: null,
+        dateEnd: null,
+      }],
+      education: [{
+        school: null,
+        degree: null,
+        dateStart: null,
+        dateEnd: null,
+      }],
+    },
   };
 
-  const userCreated = await TeamModel.create(teamProfileData);
-  return userCreated;
+  try {
+    const userCreated = await PlayerModel.create(playerProfileData);
+    return userCreated;
+  } catch (e) {
+    throw e;
+  }
 }
-
 
 async function checkIfUserAccountExist(email) {
   const filter = {
     'accountInfo.email': email,
   };
 
-  const [result] = await TeamModel.find(filter);
+  const [result] = await PlayerModel.find(filter);
 
   if (!result || [result] === undefined) {
     throw createNotFoundDataError();
@@ -66,7 +82,7 @@ async function checkIfActivatedAccount(email) {
     'accountInfo.activatedAt': { $ne: null },
   };
 
-  const [result] = await TeamModel.find(filter);
+  const [result] = await PlayerModel.find(filter);
 
   if (!result || [result] === undefined) {
     throw createNotFoundDataError();
@@ -83,17 +99,16 @@ async function checkIfCorrectPassword(email, password) {
     'accountInfo.password': 1,
     _id: 0,
   };
-  const [result] = await TeamModel.find(filter, projection);
+  const [result] = await PlayerModel.find(filter, projection);
 
   const { password: secretPassword } = result.accountInfo;
   const correctPassword = await bcrypt.compare(password, secretPassword);
 
   if (correctPassword === false) {
-    throw new Error();
+    throw new Error('la contraseña es invalida');
   }
   return null;
 }
-
 
 async function getUserAccountInfo(email) {
   const filter = {
@@ -102,8 +117,8 @@ async function getUserAccountInfo(email) {
   const projection = {
     accountInfo: 1,
   };
-  const userAccountInfo = await TeamModel.find(filter, projection).lean();
 
+  const userAccountInfo = await PlayerModel.find(filter, projection).lean();
   return userAccountInfo;
 }
 
@@ -115,8 +130,28 @@ async function getProfile(uuid) {
     _id: 0,
   };
 
-  const profile = await TeamModel.findOne(filter, projection).lean();
+  const profile = await PlayerModel.findOne(filter, projection).lean();
   return profile;
+}
+
+
+async function getApplicantProfile(applicantsUuids) {
+  const filterApplicantsData = {
+    uuid: {
+      $in: applicantsUuids,
+    },
+  };
+
+  const projectionApplicantsData = {
+    uuid: 1,
+    avatarUrl: 1,
+    fullName: 1,
+    tags: 1,
+    _id: 0,
+  };
+
+  const users = await PlayerModel.find(filterApplicantsData, projectionApplicantsData).lean();
+  console.log(users);
 }
 
 
@@ -125,13 +160,12 @@ async function getProfile(uuid) {
  * @param {Object} userData data to be updated
  * @return {Object} null if everything is ok
  */
-async function updateUserProfile(uuid, userData) {
+async function updateProfile(uuid, userData) {
   const userDataProfileMongoose = dot.dot(userData);
   const filter = {
     'accountInfo.uuid': uuid,
   };
-  await TeamModel.updateOne(filter, userDataProfileMongoose);
-
+  await PlayerModel.updateOne(filter, userDataProfileMongoose);
   return null;
 }
 
@@ -172,8 +206,37 @@ async function updateAvatar(file, uuid) {
       'accountInfo.uuid': uuid,
     };
 
-    await TeamModel.updateOne(filter, { avatarUrl });
+    await PlayerModel.updateOne(filter, { avatarUrl });
   }).end(file.buffer);
+}
+
+async function addTags(userTags, uuid) {
+  const tags = Object.values(userTags);
+  const filter = {
+    'accountInfo.uuid': uuid,
+  };
+  const update = {
+    $set: { tags },
+  };
+  await PlayerModel.findOneAndUpdate(filter, update);
+  return null;
+}
+
+async function deleteTags(userTags, uuid) {
+  const tags = Object.values(userTags);
+
+  const filter = {
+    'accountInfo.uuid': uuid,
+  };
+
+  const update = {
+    $pull: {
+      tags: { $in: tags },
+    },
+  };
+
+  await PlayerModel.findOneAndUpdate(filter, update);
+  return null;
 }
 
 
@@ -184,6 +247,9 @@ module.exports = {
   checkIfCorrectPassword,
   getUserAccountInfo,
   getProfile,
-  updateUserProfile,
+  getApplicantProfile,
+  updateProfile,
   updateAvatar,
+  addTags,
+  deleteTags,
 };

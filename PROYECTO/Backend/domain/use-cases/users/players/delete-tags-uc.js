@@ -4,16 +4,13 @@ const checkAuthorization = require('../../sessions/check-jwt-token-uc');
 const playerRepository = require('../../../repositories/player-repository');
 
 
-async function uploadAvatarUC(file, authorization) {
+async function deleteTagsUC(userTags, authorization) {
   const { uuid } = await checkAuthorization(authorization);
-
   try {
-    const avatarUrl = await playerRepository.updateAvatar(file, uuid);
-    console.log('uc', avatarUrl);
-    return avatarUrl;
+    await playerRepository.deleteTags(userTags, uuid);
   } catch (err) {
     throw err;
   }
 }
 
-module.exports = uploadAvatarUC;
+module.exports = deleteTagsUC;

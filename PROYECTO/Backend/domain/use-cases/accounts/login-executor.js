@@ -2,8 +2,8 @@
 
 const jwt = require('jsonwebtoken');
 
-const playerRepository = require('../../repositories/user/player-repository');
-const teamRepository = require('../../repositories/user/team-repository');
+const playerRepository = require('../../repositories/player-repository');
+const teamRepository = require('../../repositories/team-repository');
 const createAuthenticationError = require('../errors/authentication-error');
 
 async function loginExecutor(credentials) {

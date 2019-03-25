@@ -2,24 +2,28 @@
 
 const express = require('express');
 
-const getJobInfo = require();
-const checkJwtToken = require();
-const createJob = require();
-const deleteJob = require();
-const applyJob = require();
-const viewApplicants = require();
-const deleteApplicants = require();
 
+const postJob = require('../controllers/jobs/post-job-c');
+
+// //const updateJob = require();
+// const deleteJob = require();
+
+const getJobApplicants = require('../controllers/jobs/get-job-applicants-c.js');
+// // const rejectJobApplicants = require();
+
+const getJobInfo = require('../controllers/jobs/get-job-info-c');
+// const applyJob = require();
 
 const router = express.Router();
 
-router.get('/jobs', checkJwtToken, getJobInfo);
+router.post('/job', postJob);
+// //router.put('/job', updateJob);
+// router.delete('/job', deleteJob);
+router.get('/job/applicants', getJobApplicants);
+// // router.put('/job/applicants', rejectJobApplicants);
 
-router.post('/team/jobs', checkJwtToken, createJob);
-router.delete('/team/jobs', checkJwtToken, deleteJob);
-router.get('/team/jobs', checkJwtToken, viewApplicants);
-router.patch('/team/jobs', checkJwtToken, deleteApplicants);
+router.get('/job', getJobInfo);
+// router.put('/jobs/apply', applyJob);
 
-router.put('/jobs/apply', checkJwtToken, applyJob);
 
 module.exports = router;

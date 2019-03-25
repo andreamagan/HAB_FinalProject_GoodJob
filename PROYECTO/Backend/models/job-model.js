@@ -7,10 +7,11 @@ const { ObjectId } = Schema;
 
 const jobSchema = new Schema({
   team: ObjectId,
-  uuid: String,
+  jobId: { Type: String },
   title: String,
   description: String,
   createdAt: Date,
+  deletedAt: Date,
   tags: [],
   applicants: [],
 });

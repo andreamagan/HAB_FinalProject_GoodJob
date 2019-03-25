@@ -10,7 +10,7 @@ async function updatePlayerAvatarController(req, res, next) {
     const avatarUrl = await updatePlayerAvatarUC(file, authorization);
     console.log('c', avatarUrl);
     res.header('Location', avatarUrl);
-    return res.status(204).send();
+    return res.status(201).send();
   } catch (e) {
     return next(e);
   }

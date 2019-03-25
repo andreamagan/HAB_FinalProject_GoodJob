@@ -7,7 +7,7 @@ async function createAccountController(req, res, next) {
 
   try {
     await createAccountUC(acountData);
-    return res.status(204).json();
+    return res.status(201).json();
   } catch (e) {
     return next(e);
   }

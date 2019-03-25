@@ -8,7 +8,7 @@ class ForbiddenError extends Error {
   }
 }
 
-function createNotFoundDataError(message) {
+function createForbiddenError(message) {
   return new ForbiddenError(message);
 }
 

@@ -1,7 +1,7 @@
 'use strict';
 
 const checkAuthorization = require('../../sessions/check-jwt-token-uc');
-const teamRepository = require('../../../repositories/user/team-repository');
+const teamRepository = require('../../../repositories/team-repository');
 
 
 async function uploadAvatarUC(file, authorization) {

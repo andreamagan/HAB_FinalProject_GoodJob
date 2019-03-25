@@ -8,6 +8,7 @@ class AuthenticatedError extends Error {
   }
 }
 
+
 function createAuthenticatedError(message) {
   return new AuthenticatedError(message);
 }

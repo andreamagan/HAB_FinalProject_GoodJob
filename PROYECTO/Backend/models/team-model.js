@@ -7,7 +7,7 @@ const { Schema } = mongoose;
 
 const teamSchema = new Schema({
   teamInfo: {
-    fullNameTeam: String,
+    fullName: String,
     shortName: String,
     description: String,
     social: {
@@ -33,6 +33,7 @@ const teamSchema = new Schema({
   avatarUrl: String,
 
   players: [],
+  jobs: [],
 });
 
 const Team = mongoose.model('Team', teamSchema);

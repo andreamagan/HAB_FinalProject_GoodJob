@@ -3,7 +3,7 @@
 const Joi = require('joi');
 
 const checkAuthorization = require('../../sessions/check-jwt-token-uc');
-const playerRepository = require('../../../repositories/user/player-repository');
+const playerRepository = require('../../../repositories/player-repository');
 
 
 async function validate(payload) {

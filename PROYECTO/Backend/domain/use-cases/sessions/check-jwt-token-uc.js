@@ -8,7 +8,7 @@ async function checkJwtToken(authorization) {
     throw createUnauthorizedError();
   }
 
-  const [prefix, token] = authorization.split(' '); // [JWT, quwrioquwoerquweroqweu]
+  const [prefix, token] = authorization.split(' ');
   if (prefix !== 'JWT') {
     throw createUnauthorizedError();
   }

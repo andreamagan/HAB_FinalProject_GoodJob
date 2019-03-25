@@ -8,7 +8,7 @@ async function updateTeamAccountController(req, res, next) {
 
   try {
     await updateTeamAccountUC(userDataInput, authorization);
-    return res.status(204).send('update complete');
+    return res.status(204).send();
   } catch (e) {
     return next(e);
   }
