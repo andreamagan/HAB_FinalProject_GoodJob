@@ -3,9 +3,9 @@
 const checkAuthorization = require('../../sessions/check-jwt-token-uc');
 const playerRepository = require('../../../repositories/player-repository');
 
-
 async function uploadAvatarUC(file, authorization) {
-  const { uuid } = await checkAuthorization(authorization);
+  const { uuid, role } = await checkAuthorization(authorization);
+  await acceptOnlyRole(role, process.env.EXPECTED_ROLE_PLAYER);
 
   try {
     const avatarUrl = await playerRepository.updateAvatar(file, uuid);

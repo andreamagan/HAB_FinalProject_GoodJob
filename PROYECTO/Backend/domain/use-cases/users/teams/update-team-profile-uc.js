@@ -25,7 +25,8 @@ async function validate(payload) {
 }
 
 async function updateUserProfile(userData, authorization) {
-  const { uuid } = await checkAuthorization(authorization);
+  const { uuid, role } = await checkAuthorization(authorization);
+  await acceptOnlyRole(role, process.env.EXPECTED_ROLE_TEAM);
 
   await validate(userData);
 

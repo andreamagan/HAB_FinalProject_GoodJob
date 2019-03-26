@@ -5,7 +5,10 @@ const uuidV4 = require('uuid/v4');
 const JobModel = require('../../models/job-model');
 
 async function postJob(teamProfile, jobInputData) {
-  const now = new Date().toISOString().substring(0, 19).replace('T', ' ');
+  const now = new Date()
+    .toISOString()
+    .substring(0, 19)
+    .replace('T', ' ');
   const { title, description, tags } = jobInputData;
   const { shortName } = teamProfile.teamInfo;
   const { _id } = teamProfile;
@@ -57,9 +60,23 @@ async function getJobInfo(jobId) {
   return jobInfo;
 }
 
+async function deleteJob(jobId) {
+  const now = new Date()
+    .toISOString()
+    .substring(0, 19)
+    .replace('T', ' ');
+
+  update = {
+    deletedAt: now,
+  };
+
+  await JobModel.findOneAndUpdate(jobId, update).lean();
+  return null;
+}
+
 module.exports = {
   postJob,
   getJobInfo,
   getJobApplicantsUuids,
-
+  deleteJob,
 };
