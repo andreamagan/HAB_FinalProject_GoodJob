@@ -1,107 +1,118 @@
-### Account
+# Account
 
-##1 Sing UP
+## 1 Sing UP 🍐
+> POST /account/player  
 
-# POST /account/player
+* Validate input data - Joi
+* Create verification code - uuid
+* Encrypt password - bcrypt
+* Create uuid - uuidv4
+* Create User Profile - PlayerModel
+* Insert into data base - mongo pool
+* Send verification email - mailchimp
 
--> Validate input data - Joi
--> Create verification code - uuid
--> Encrypt password - bcrypt
--> Create uuid - uuidv4
--> Create User Profile - PlayerModel
--> Insert into data base - mongo pool
--> Send verification email - mailchimp
+## 2 Log IN 🍐
+> POST /account/login
 
-##2 Log IN
+* Validate input data - Joi
+* Check if user exist - mongo query
+* Check if account is activated
+* Check if password its OK
+* Generate Access Token
 
-# POST /account/login
+<br />
 
--> Validate input data - Joi
--> Check if user exist - mongo query
--> Check if account is activated
--> Check if password its OK
--> Generate Access Token
+---
+---
 
-### Player
+<br />
 
-##1 Get player Profile
+# Player
 
-# GET /player
+## 1 Get player Profile 🍐
+> GET /player
 
-##2 Update player Profile
+## 2 Update player Profile 🍐
+> PUT /player
 
-# PUT /player
+## 3 Update avatar 🍐
+> POST /player/avatar
 
-##3 Update avatar
+## 4 Update background 🍓
+> PATCH /player/background
 
-# POST /player/avatar
+## 5 Add tags 🍐
+> POST/player/tags
 
-##4 Update background
+## 6 Delete tags 🍐
+> DELETE/player/tags
 
-# PATCH /player/background
 
-##5 Add tags
+<br />
 
-# POST/player/tags
+---
+---
 
-##6 Delete tags
+<br />
 
-# DELETE/player/tags
 
-### Team
+# Team
 
-##1 Get team Profile
+## 1 Get team Profile 🍐
+> GET / team
 
-# GET / team
+## 2 Update team Profile 🍐
+> PUT /team
 
-##2 Get team Profile
+## 3 Update avatar 🍐
+> POST /team/avatar
 
-# PUT /team
 
-##3 Update avatar
+<br />
 
-# POST /team/avatar
+---
+---
 
-### Job
+<br />
 
-##1 Create new job
 
-# POST /job
+# Job
 
-##2 Update job
+## 1 Create new job 🍐
+> POST /job
 
-# PUT /job
+## 2 Update job 🍓
+> PUT /job
 
-##3 Delete job
+## 3 Delete job 🍐
+> DELETE /job
 
-# DELETE /job
+## 4 Get applicants 🍐
+> GET /job/applicants
 
-##4 Get applicants
+## 5 Reject applicants 🍓
+> DELETE /job/applicants
 
-# GET /job/applicants
+## 1 Get job info🍐
+> GET /job
 
-##5 Reject applicants
+## 2 Apply to job 🍓
+> POST /job/apply
 
-# DELETE /job/applicants
+<br />
 
-##1 Get job info
+---
+---
 
-# GET /job
+<br />
 
-##2 Apply to job
+# Home
 
-# POST /job/apply
+## 1 Show last jobs 🍓
+> GET /jobs
 
-### Home
+## 2 Search Jobs by tag or title 🍓
+> ET /seach/jobs
 
-##1 Show last jobs
-
-# GET /jobs
-
-##2 Search Jobs by tag or title
-
-# GET /seach/jobs
-
-##3 Search Peoble by tag, nick or Full Name
-
-# GET /seach/people
+## 3 Search Peoble by tag, nick or Full Name 🍓
+> GET /seach/people

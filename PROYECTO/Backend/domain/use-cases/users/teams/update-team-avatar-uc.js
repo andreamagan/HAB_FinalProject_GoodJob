@@ -1,7 +1,7 @@
 'use strict';
 
 const checkAuthorization = require('../../sessions/check-jwt-token-uc');
-const acceptOnlyRole = require('../sessions/accept-only-role-uc');
+const acceptOnlyRole = require('../../sessions/accept-only-role-uc');
 
 const teamRepository = require('../../../repositories/team-repository');
 
