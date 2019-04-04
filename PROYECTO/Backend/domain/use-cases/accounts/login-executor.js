@@ -38,6 +38,8 @@ async function loginExecutor(credentials) {
       const jwtTokenExpiration = parseInt(process.env.AUTH_ACCESS_TOKEN_TTL, 10);
       const token = jwt.sign(payloadJwt, process.env.AUTH_JWT_SECRET, { expiresIn: jwtTokenExpiration });
       const response = {
+        email,
+        role,
         accessToken: token,
         expiresIn: jwtTokenExpiration,
       };
@@ -74,6 +76,8 @@ async function loginExecutor(credentials) {
       const jwtTokenExpiration = parseInt(process.env.AUTH_ACCESS_TOKEN_TTL, 10);
       const token = jwt.sign(payloadJwt, process.env.AUTH_JWT_SECRET, { expiresIn: jwtTokenExpiration });
       const response = {
+        uuid: accountInfo.uuid,
+        role: accountInfo.role,
         accessToken: token,
         expiresIn: jwtTokenExpiration,
       };
