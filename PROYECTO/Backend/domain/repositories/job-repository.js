@@ -13,6 +13,7 @@ async function postJob(teamProfile, jobInputData) {
   const { shortName } = teamProfile.teamInfo;
   const { _id } = teamProfile;
   const uuid = uuidV4();
+  console.log(_id);
 
   const jobData = {
     team: _id,
@@ -24,7 +25,11 @@ async function postJob(teamProfile, jobInputData) {
     tags,
     applicants: [],
   };
+
+  console.log(jobData);
+
   const jobPosted = await JobModel.create(jobData);
+  console.log(jobPosted);
   return jobPosted;
 }
 
@@ -39,10 +44,9 @@ async function getJobApplicantsUuids(jobId) {
   };
 
   const applicantsResult = await JobModel.findOne(filter, projection).lean(); // [{ ...user1 }, { ...user2 }, ...{user n}]
-  // borrame
-  console.log('applicantsResult', applicantsResult);
-  const applicantsUuids = applicantsResult.applicants.map(f => f.uuid); // [uuid1, uuid2, ..., uuid n]
-  console.log('applicantsUuids', applicantsUuids);
+  console.log(applicantsResult);
+  const applicantsUuids = applicantsResult.applicants;
+
   return applicantsUuids;
 }
 
@@ -56,7 +60,6 @@ async function getJobInfo(jobId) {
   };
 
   const jobInfo = await JobModel.find(jobId, projection).lean();
-  console.log(jobInfo);
   return jobInfo;
 }
 
@@ -66,12 +69,52 @@ async function deleteJob(jobId) {
     .substring(0, 19)
     .replace('T', ' ');
 
-  update = {
+  const update = {
     deletedAt: now,
   };
+  console.log('3', jobId);
 
   await JobModel.findOneAndUpdate(jobId, update).lean();
   return null;
+}
+
+async function searchJobs(keyword) {
+  const filter = {
+    $text: {
+      $search: keyword,
+    },
+  };
+
+  const score = {
+    score: {
+      $meta: 'textScore',
+    },
+  };
+
+  const jobs = await JobModel.find(filter, score).sort(score).lean();
+  return jobs;
+}
+
+async function getNewJobs() {
+  const filter = {
+    deletedAt: null,
+  };
+
+  const newJobs = await JobModel.find(filter).sort({ $natural: -1 }).limit(5);
+  return newJobs;
+}
+
+
+async function applyJob(jobId, uuid) {
+  const filter = {
+    jobId,
+  };
+  const update = {
+    $addToSet: {
+      applicants: uuid,
+    },
+  };
+  await JobModel.findOneAndUpdate(filter, update);
 }
 
 module.exports = {
@@ -79,4 +122,7 @@ module.exports = {
   getJobInfo,
   getJobApplicantsUuids,
   deleteJob,
+  searchJobs,
+  getNewJobs,
+  applyJob,
 };

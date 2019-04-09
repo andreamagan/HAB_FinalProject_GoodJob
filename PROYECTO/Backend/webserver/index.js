@@ -26,6 +26,7 @@ app.use('/api', routes.accountRouter);
 app.use('/api', routes.playerRouter);
 app.use('/api', routes.teamRouter);
 app.use('/api', routes.jobRouter);
+app.use('/api', routes.searchRouter);
 
 /**
  * BORRAME

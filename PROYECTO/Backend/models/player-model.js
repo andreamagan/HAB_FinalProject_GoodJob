@@ -48,6 +48,16 @@ const playerSchema = new Schema({
   },
 });
 
+playerSchema.index(
+  {
+    'personalInfo.fullName': 'text',
+    'personalInfo.nickName': 'text',
+    'personalInfo.description': 'text',
+    tags: 'text',
+  },
+);
+
+
 const Player = mongoose.model('Player', playerSchema);
 
 module.exports = Player;

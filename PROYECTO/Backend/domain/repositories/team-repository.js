@@ -111,11 +111,8 @@ async function getProfile(uuid) {
   const filter = {
     'accountInfo.uuid': uuid,
   };
-  const projection = {
-    _id: 0,
-  };
 
-  const profile = await TeamModel.findOne(filter, projection).lean();
+  const profile = await TeamModel.findOne(filter).lean();
   return profile;
 }
 
@@ -188,6 +185,23 @@ async function postJob(uuid, jobId) {
   return null;
 }
 
+async function searchTeams(keyword) {
+  const filter = {
+    $text: {
+      $search: keyword,
+    },
+  };
+
+  const score = {
+    score: {
+      $meta: 'textScore',
+    },
+  };
+
+  const teams = await TeamModel.find(filter, score).sort(score).lean();
+  return teams;
+}
+
 module.exports = {
   insertUserAccountInDB,
   checkIfActivatedAccount,
@@ -198,4 +212,5 @@ module.exports = {
   updateUserProfile,
   updateAvatar,
   postJob,
+  searchTeams,
 };

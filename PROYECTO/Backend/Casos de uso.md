@@ -47,6 +47,8 @@
 ## 6 Delete tags 🍐
 > DELETE/player/tags
 
+## 7 Job application status 🍓
+> GET/player/job-aplication
 
 <br />
 
@@ -108,11 +110,11 @@
 
 # Home
 
-## 1 Show last jobs 🍓
+## 1 Show last jobs 🍐
 > GET /jobs
 
-## 2 Search Jobs by tag or title 🍓
-> ET /seach/jobs
+## 2 Search Jobs by tag, title, description  🍐
+> GET /seach/jobs
 
-## 3 Search Peoble by tag, nick or Full Name 🍓
+## 3 Search Peoble by tag, nick or Full Name 🍐
 > GET /seach/people

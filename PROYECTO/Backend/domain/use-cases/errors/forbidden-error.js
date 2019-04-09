@@ -9,6 +9,7 @@ class ForbiddenError extends Error {
 }
 
 function createForbiddenError(message) {
+  console.log('no pasarás');
   return new ForbiddenError(message);
 }
 

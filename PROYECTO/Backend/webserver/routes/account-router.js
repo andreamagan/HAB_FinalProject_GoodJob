@@ -6,11 +6,10 @@ const createAccount = require('../controllers/account/create-account-c');
 // const activateAccount = require();
 const login = require('../controllers/account/login-c');
 
-const accountRouter = express.Router();
+const router = express.Router();
 
-accountRouter.post('/account', createAccount);
-// accountRouter.post('/account/team', createTeamAccount);
+router.post('/account', createAccount);
 // accountRouter.get('/account/activate', activateAccount);
-accountRouter.post('/account/login', login);
+router.post('/account/login', login);
 
-module.exports = accountRouter;
+module.exports = router;

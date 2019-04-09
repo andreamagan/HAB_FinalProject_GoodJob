@@ -36,6 +36,16 @@ const teamSchema = new Schema({
   jobs: [],
 });
 
+teamSchema.index(
+  {
+    'teamInfo.fullname': 'text',
+    'teamInfo.shortName': 'text',
+    'teamInfo.description': 'text',
+    tags: 'text',
+  },
+);
+
+
 const Team = mongoose.model('Team', teamSchema);
 
 module.exports = Team;

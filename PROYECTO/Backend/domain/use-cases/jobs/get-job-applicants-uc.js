@@ -8,7 +8,8 @@ const playerRepositoy = require('../../repositories/player-repository');
 
 async function getJobApplicantsUC(jobId, authorization) {
   const { role } = await checkAuthorization(authorization);
-  await acceptOnlyRole(role, process.env.EXPECTED_ROLE_TEAM);
+  const aceptedRole = 'team';
+  await acceptOnlyRole(role, aceptedRole);
 
   try {
     const applicantsUuids = await jobRepository.getJobApplicantsUuids(jobId);

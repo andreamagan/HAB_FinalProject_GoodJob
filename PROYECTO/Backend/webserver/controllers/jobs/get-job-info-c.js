@@ -3,7 +3,7 @@
 const getJobInfoUC = require('../../../domain/use-cases/jobs/get-job-info-uc');
 
 async function getJobInfoController(req, res, next) {
-  const jobId = { ...req.body };
+  const { jobId } = req.query;
   console.log(jobId);
   const { authorization } = req.headers;
 

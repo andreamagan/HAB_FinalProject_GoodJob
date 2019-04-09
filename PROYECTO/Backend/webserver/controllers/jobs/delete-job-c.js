@@ -8,10 +8,10 @@ async function deleteJobController(req, res, next) {
 
   try {
     await deleteJobUC(jobId, authorization);
-    return res.status(201).send('');
+    return res.status(204).send();
   } catch (e) {
     return next(e);
   }
 }
 
-module.exports = postJobController;
+module.exports = deleteJobController;

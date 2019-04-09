@@ -136,22 +136,25 @@ async function getProfile(uuid) {
 
 
 async function getApplicantProfile(applicantsUuids) {
+  console.log('2', applicantsUuids);
   const filterApplicantsData = {
-    uuid: {
+    'accountInfo.uuid': {
       $in: applicantsUuids,
     },
   };
 
   const projectionApplicantsData = {
-    uuid: 1,
+    'accountInfo.uuid': 1,
     avatarUrl: 1,
-    fullName: 1,
+    'personalInfo.fullName': 1,
+    'personalInfo.nickName': 1,
     tags: 1,
     _id: 0,
   };
 
-  const users = await PlayerModel.find(filterApplicantsData, projectionApplicantsData).lean();
-  console.log(users);
+  const applicantProfiles = await PlayerModel.find(filterApplicantsData, projectionApplicantsData).lean();
+  console.log('3', applicantProfiles);
+  return applicantProfiles;
 }
 
 
@@ -222,6 +225,7 @@ async function addTags(userTags, uuid) {
   return null;
 }
 
+
 async function deleteTags(userTags, uuid) {
   const tags = Object.values(userTags);
 
@@ -240,6 +244,24 @@ async function deleteTags(userTags, uuid) {
 }
 
 
+async function searchPlayers(keyword) {
+  const filter = {
+    $text: {
+      $search: keyword,
+    },
+  };
+
+  const score = {
+    score: {
+      $meta: 'textScore',
+    },
+  };
+
+  const players = await PlayerModel.find(filter, score).sort(score).lean();
+  return players;
+}
+
+
 module.exports = {
   insertUserAccountInDB,
   checkIfActivatedAccount,
@@ -252,4 +274,5 @@ module.exports = {
   updateAvatar,
   addTags,
   deleteTags,
+  searchPlayers,
 };

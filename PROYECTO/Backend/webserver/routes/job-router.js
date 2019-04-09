@@ -2,28 +2,31 @@
 
 const express = require('express');
 
-
 const postJob = require('../controllers/jobs/post-job-c');
 
 // //const updateJob = require();
-// const deleteJob = require();
+const deleteJob = require('../controllers/jobs/delete-job-c');
 
 const getJobApplicants = require('../controllers/jobs/get-job-applicants-c.js');
 // // const rejectJobApplicants = require();
 
+const getNewJobs = require('../controllers/jobs/get-new-jobs-c');
 const getJobInfo = require('../controllers/jobs/get-job-info-c');
-// const applyJob = require();
+
+const applyJob = require('../controllers/jobs/apply-job-c');
 
 const router = express.Router();
 
 router.post('/job', postJob);
 // //router.put('/job', updateJob);
-// router.delete('/job', deleteJob);
+router.put('/job', deleteJob);
 router.get('/job/applicants', getJobApplicants);
 // // router.put('/job/applicants', rejectJobApplicants);
 
+router.get('/jobs', getNewJobs);
 router.get('/job', getJobInfo);
-// router.put('/jobs/apply', applyJob);
+
+router.put('/job/apply', applyJob);
 
 
 module.exports = router;
