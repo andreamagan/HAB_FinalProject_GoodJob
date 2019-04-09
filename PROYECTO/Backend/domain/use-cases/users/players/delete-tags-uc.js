@@ -1,8 +1,9 @@
 'use strict';
 
 const checkAuthorization = require('../../sessions/check-jwt-token-uc');
-const playerRepository = require('../../../repositories/player-repository');
+const acceptOnlyRole = require('../get-user-profile-uc');
 
+const playerRepository = require('../../../repositories/player-repository');
 
 async function deleteTagsUC(userTags, authorization) {
   const { uuid, role } = await checkAuthorization(authorization);
