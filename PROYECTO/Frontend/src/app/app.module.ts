@@ -21,6 +21,11 @@ import { environment } from 'src/environments/environment.prod';
 import { HttpClientModule } from '@angular/common/http';
 import { GlobalState } from './store/global.state';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -44,7 +49,9 @@ import { GlobalState } from './store/global.state';
     NgxsModule.forRoot([GlobalState], {
       developmentMode: !environment.production
     }),
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

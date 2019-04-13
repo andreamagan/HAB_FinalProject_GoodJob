@@ -1,0 +1,107 @@
+@import 'colors.scss';
+
+.form-column{
+  position: relative;
+  height: 100vh; 
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  margin: 0 auto 0 auto;
+  width: 90% ;
+
+  .logo {
+    width: 160px;
+    height: 80px;
+  }
+
+  .form-area {
+  width:400px;
+  background-color: rgba($color: $plight, $alpha: 0.6) ;
+  margin: 2rem;
+  border-bottom: 2px solid $orange;
+  
+ 
+  ::ng-deep {
+  .form-content {
+  
+   .mat-radio-group {
+      margin: 0 auto;
+
+    //   p {
+    //     width: 50px;
+    //     height: 50px;
+    //     font-size: 250%;
+    //     color: $orange;
+    //     padding: 0.2rem;
+    //     border: 1px solid $orange;
+    //     border-radius: 50%
+    //   }
+   }
+
+   .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: $grey;
+  }
+  
+  .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: $orange;
+ 
+  }
+  
+  .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color: $pdark;
+    opacity: 0.5;
+  }
+ 
+   mat-form-field ,mat-form-field,mat-label{
+    margin-left: 1%;
+    font-weight: lighter;
+    color: $white;
+    opacity: 0.75;
+  }
+
+  button {
+    width: 100%;
+    color: $orange
+  }
+  
+  ::placeholder{
+    font-size: 0.75rem;
+    color: $white;
+    opacity: 0.75;
+  }
+   }
+
+  }
+
+
+  
+
+
+  h6{
+    text-align: center;
+    color: $white;
+    padding: 1rem 0.2rem ;
+    background-color: $primary;
+  }
+
+  caption {
+    width: 100%;
+    margin-top: 1.2rem;
+    display: inline-flex;
+    text-align:center;
+
+    a {
+      margin-left: 8px; 
+      color: $white;
+      text-decoration: none;
+  }
+ 
+  }
+  .form{
+    padding:2rem;
+
+    
+  }
+  }
+}

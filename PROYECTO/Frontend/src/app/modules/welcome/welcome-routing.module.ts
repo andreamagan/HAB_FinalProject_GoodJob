@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
-import { LayoutComponent } from 'src/app/shared/layout/layout.component';
 
 const routes: Routes = [
   {
@@ -11,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: LayoutComponent,
+    component: WelcomeComponent,
     children: [
       {
         path: 'welcome',

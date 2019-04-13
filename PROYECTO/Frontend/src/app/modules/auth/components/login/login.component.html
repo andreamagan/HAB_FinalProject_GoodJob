@@ -1,0 +1,39 @@
+<esn-forms>
+  <form [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
+    <div class="form-content">
+      <!-- <mat-radio-group name="opciones" aria-label="Select an option" [(ngModel)]="selectedRole"
+        [ngModelOptions]="{standalone: true}">
+        <p>🕹️</p>
+        <mat-radio-button [value]="Player" name="role">Player
+        </mat-radio-button>
+        <p>🛡️</p>
+        <mat-radio-button [value]="Team" name="role">Team
+        </mat-radio-button>
+      </mat-radio-group> -->
+
+      <esn-form-control [control]="loginForm.get('role')">
+        <mat-radio-group formControlName="role">
+          <mat-radio-button *ngFor="let role of roleTypes" [value]="role" style="margin: 10px">
+            {{role}}
+          </mat-radio-button>
+        </mat-radio-group>
+
+      </esn-form-control>
+
+      <esn-form-control [control]="loginForm.get('email')">
+        <mat-form-field [floatLabel]="loginForm.value.floatLabel">
+          <mat-label>User Name</mat-label>
+          <input matInput placeholder="Hey you!" required type="text" formControlName="email" />
+        </mat-form-field>
+      </esn-form-control>
+
+      <esn-form-control [control]="loginForm.get('password')">
+        <mat-form-field [floatLabel]="loginForm.value.floatLabel">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Shhh, it's a secret" required type="password" formControlName="password" />
+        </mat-form-field>
+      </esn-form-control>
+      <button mat-stroked-button type="submit"> Login </button>
+    </div>
+  </form>
+</esn-forms>

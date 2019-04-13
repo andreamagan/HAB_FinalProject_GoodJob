@@ -1,15 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'esn-forms',
-  templateUrl: './forms.component.html',
+  template: '<ng-content></ng-content>',
   styleUrls: ['./forms.component.scss']
 })
-export class FormsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class FormsComponent {
 }

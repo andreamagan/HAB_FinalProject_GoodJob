@@ -27,8 +27,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/scss/styles.scss",
-              "./node_modules/simple-css-reset/reset.css"
+              {
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+              },
+              "./node_modules/simple-css-reset/reset.css",
+              "src/scss/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -90,6 +93,9 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
+              {
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+              },
               "src/styles.scss"
             ],
             "scripts": [],
