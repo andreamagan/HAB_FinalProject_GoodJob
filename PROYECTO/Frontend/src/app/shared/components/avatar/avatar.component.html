@@ -1,3 +1,4 @@
-<p>
-  avatar works!
-</p>
+<div id="avatar">
+  <img *ngIf="avatarDefault" [src]="avatarDefault" class="avatar" alt="User avatar" />
+  <img *ngIf="teamDefault" [src]="teamDefault" class="team" alt="Team avatar" />
+</div>

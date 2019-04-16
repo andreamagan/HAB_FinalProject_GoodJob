@@ -17,13 +17,12 @@
             {{role}}
           </mat-radio-button>
         </mat-radio-group>
-
       </esn-form-control>
 
       <esn-form-control [control]="loginForm.get('email')">
         <mat-form-field [floatLabel]="loginForm.value.floatLabel">
-          <mat-label>User Name</mat-label>
-          <input matInput placeholder="Hey you!" required type="text" formControlName="email" />
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Hey you!" required type="email" formControlName="email" />
         </mat-form-field>
       </esn-form-control>
 
@@ -33,6 +32,7 @@
           <input matInput placeholder="Shhh, it's a secret" required type="password" formControlName="password" />
         </mat-form-field>
       </esn-form-control>
+
       <button mat-stroked-button type="submit"> Login </button>
     </div>
   </form>

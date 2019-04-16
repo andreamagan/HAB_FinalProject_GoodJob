@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'esn-welcome',
-  templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.scss']
+  templateUrl: './welcome.page.html',
+  styleUrls: ['./welcome.page.scss']
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomePage implements OnInit {
 
   constructor() { }
 

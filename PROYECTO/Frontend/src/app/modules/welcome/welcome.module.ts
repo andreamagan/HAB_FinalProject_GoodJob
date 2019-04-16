@@ -4,13 +4,13 @@ import { WelcomeRoutingModule } from './welcome-routing.module';
 
 import { AuthModule } from '../auth/auth.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { WelcomePage } from './pages/welcome.page';
 import { AuthFormsComponent } from './components/auth-forms/auth-forms.component';
 
 
 
 @NgModule({
-  declarations: [WelcomeComponent, AuthFormsComponent],
+  declarations: [WelcomePage, AuthFormsComponent],
   imports: [
     CommonModule,
     WelcomeRoutingModule,

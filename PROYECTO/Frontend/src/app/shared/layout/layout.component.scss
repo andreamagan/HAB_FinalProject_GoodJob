@@ -4,25 +4,70 @@
 header, footer {
   background-color: $primary;
   color: $white;
+ 
 }
 
-header {
+header, footer {
   display: grid;
   grid-template: 80% 20%;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 1%;
+  max-height: 80px;
 
+  .mat-icon-button{
+  align-self: center;
+  }
   .logo {
     grid-column: auto;
     justify-self: center;
     align-self: center;
+    max-height: 60px;
   }
-  .avatar {
+
+  esn-avatar {
     margin-right: 1rem ;
     justify-self: flex-end;
     align-self: center;
   }
+}
 
+.nav-list{
+  padding: 1rem;
+
+  mat-divider{
+    margin: 0.25rem;
+  }
+
+  h6 {
+    margin-bottom: 0.5rem;
+  }
+
+
+}
+
+footer{
+  width: 100%;
+  padding:1rem;
+  align-self: center;
+  ul{
+    li{
+      display: inline-block;
+      justify-content: right;
+      fa-icon{
+        margin: 0 0.5rem;
+        font-size: 1rem;
+      }
+    }
+  }
+  a{
+    color: white;
+    opacity: 0.5;
+    text-decoration: none;
+    justify-self: flex-end;
+  }
+  :hover{
+   opacity: 1;
+  }
 }
 
 

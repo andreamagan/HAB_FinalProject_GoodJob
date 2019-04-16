@@ -13,10 +13,11 @@ import { AuthState } from 'src/app/store/auth/auth.state';
 import { LoginComponent } from './components/login/login.component';
 import { StoreModule } from 'src/app/store/store.module';
 import { MaterialModule } from 'src/app/material/material.module';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -34,6 +35,7 @@ import { MaterialModule } from 'src/app/material/material.module';
   ],
   exports: [
     LoginComponent,
+    RegisterComponent
   ]
 })
 export class AuthModule { }

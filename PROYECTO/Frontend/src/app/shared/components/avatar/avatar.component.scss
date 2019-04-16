@@ -1,0 +1,20 @@
+#avatar {
+  align-items: center;
+  justify-content: center;
+
+
+  img{
+    border: 1 solid red;
+    border-radius: 50%;
+  }
+  
+  .avatar{
+    width: 40px;
+  }
+  
+  .team{
+    position: absolute;
+    z-index: 1;
+    width: 25px;
+  }
+}

@@ -14,9 +14,22 @@ import { LayoutComponent } from './layout/layout.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MaterialModule } from '../material/material.module';
 import { StoreModule } from '../store/store.module';
+import { ClickPreventDefaultDirective } from './directives/click-prevent-default.directive';
 
 @NgModule({
-  declarations: [AvatarComponent, SearchComponent, TabsComponent, CardComponent, ListComponent, FormsComponent, FormControlComponent, ErrorComponent, PageNotFoundComponent, LayoutComponent],
+  declarations: [
+    AvatarComponent,
+    SearchComponent,
+    TabsComponent,
+    CardComponent,
+    ListComponent,
+    FormsComponent,
+    FormControlComponent,
+    ErrorComponent,
+    PageNotFoundComponent,
+    LayoutComponent,
+    ClickPreventDefaultDirective,
+  ],
   imports: [
     CommonModule,
     SharedRoutingModule,
@@ -24,6 +37,18 @@ import { StoreModule } from '../store/store.module';
     MaterialModule,
     StoreModule,
   ],
-  exports: [AvatarComponent, SearchComponent, TabsComponent, CardComponent, ListComponent, FormsComponent, FormControlComponent, ErrorComponent, PageNotFoundComponent, LayoutComponent]
+  exports: [
+    AvatarComponent,
+    SearchComponent,
+    TabsComponent,
+    CardComponent,
+    ListComponent,
+    FormsComponent,
+    FormControlComponent,
+    ErrorComponent,
+    PageNotFoundComponent,
+    LayoutComponent,
+    ClickPreventDefaultDirective,
+  ]
 })
 export class SharedModule { }

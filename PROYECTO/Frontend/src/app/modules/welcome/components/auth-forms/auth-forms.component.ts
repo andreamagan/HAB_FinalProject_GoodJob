@@ -8,22 +8,26 @@ import { PlayerIndex } from '@angular/core/src/render3/interfaces/player';
   styleUrls: ['./auth-forms.component.scss']
 })
 export class AuthFormsComponent {
-  isRegisterFormVisible = false;
+  isLoginFormVisible = true;
   title = "Login";
   redirect = "Sing up";
   role = "player";
-
-  toggleForm(isRegisterClick: boolean) {
+  toggleForm(isLoginClick: boolean) {
     if (
-      (isRegisterClick && this.isRegisterFormVisible) ||
-      (!isRegisterClick && !this.isRegisterFormVisible)
+      (isLoginClick && this.isLoginFormVisible) ||
+      (!isLoginClick && !this.isLoginFormVisible)
     ) {
       return;
     }
 
-    this.isRegisterFormVisible = !this.isRegisterFormVisible;
-    this.title = "Sing up for free";
-    this.redirect = "Login";
+    this.isLoginFormVisible = !this.isLoginFormVisible;
+    if (this.isLoginFormVisible) {
+      this.title = "Login";
+      this.redirect = "Sing up";
+    } else {
+      this.title = "Sing up for free";
+      this.redirect = "Login";
+    }
   }
 
   checkRole(isPlayerClick: boolean) {

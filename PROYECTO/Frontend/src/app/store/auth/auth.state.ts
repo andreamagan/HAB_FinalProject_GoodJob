@@ -4,7 +4,7 @@ import { Navigate } from '@ngxs/router-plugin';
 
 import { Auth } from 'src/app/shared/models/auth.models';
 import { AuthService } from 'src/app/modules/auth/auth.service';
-import { Login, LoginSuccess, LoginFailed, Register, RegisterSuccess, RegisterFailed } from './auth.actions';
+import { Login, LoginSuccess, LoginFailed, Register, RegisterSuccess, RegisterFailed, Logout } from './auth.actions';
 import { SetErrors } from '../error/error.actions';
 
 
@@ -46,6 +46,13 @@ export class AuthState {
   @Action(RegisterSuccess)
   registerSuccess(ctx: StateContext<Auth>) { }
 
+
+  @Action(Logout)
+  logout({ setState, dispatch }: StateContext<Auth>) {
+    this.authService.logout();
+    setState(null);
+    dispatch(new Navigate(['/welcome']));
+  }
 
   @Action([
     LoginFailed,

@@ -32,3 +32,7 @@ export class RegisterFailed {
   static type = '[Auth] RegisterFailed';
   constructor(public errors: Error[]) { }
 }
+
+export class Logout {
+  static type = '[Auth] Logout';
+}

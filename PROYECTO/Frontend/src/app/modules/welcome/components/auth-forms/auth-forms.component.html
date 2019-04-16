@@ -1,17 +1,18 @@
-<div class="form-column">
-  <!--   
-    <div class="register-form" *ngIf="isRegisterFormVisible">
-      <sn-register></sn-register>
-    </div> -->
+<div class="form-area">
+  <h6>{{title}}</h6>
 
-  <img class="logo" src="/assets/good-job-logotipo-negativo.png" alt="logo" />
-  <div class="form-area">
-    <h6>{{title}}</h6>
-
-    <div class="form" *ngIf="!isRegisterFormVisible">
-
-      <esn-login></esn-login>
-      <caption> Don't have an account? <a snPreventDefault href="" (click)="toggleForm(false)"> {{redirect}} </a>
-      </caption>
-
-    </div>
+  <div class="form" *ngIf="isLoginFormVisible">
+    <esn-login></esn-login>
+    <caption [class.selected]="isLoginFormVisible"> Have an account?
+      <a esnPreventDefault href="" (click)="toggleForm(false)"> {{redirect}}
+      </a>
+    </caption>
+  </div>
+  <div class="form" *ngIf="!isLoginFormVisible">
+    <esn-register></esn-register>
+    <caption [class.selected]="isLoginFormVisible"> Don't have an account?
+      <a esnPreventDefault href="" (click)="toggleForm(true)"> {{redirect}}
+      </a>
+    </caption>
+  </div>
+</div>
