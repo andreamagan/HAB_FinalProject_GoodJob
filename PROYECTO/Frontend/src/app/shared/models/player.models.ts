@@ -6,7 +6,6 @@ export interface Player {
   avatarUrl: string;
   team?: any;
   background: Background;
-  __v: number;
 }
 
 export interface PersonalInfo {

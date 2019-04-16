@@ -1,0 +1,19 @@
+ul{
+  li{
+    display: inline-block;
+    justify-content: right;
+    fa-icon{
+      margin: 0 0.5rem;
+      font-size: 1rem;
+    }
+  }
+}
+a{
+  color: white;
+  opacity: 0.5;
+  text-decoration: none;
+  justify-self: flex-end;
+}
+:hover{
+ opacity: 1;
+}

@@ -1,0 +1,10 @@
+<div class="content">
+  <caption>Follow:</caption>
+  <ul>
+    <li *ngFor="let network of networks">
+      <a href={{network.link}} target="_blank">
+        <fa-icon [icon]="network.icon"></fa-icon>
+      </a>
+    </li>
+  </ul>
+</div>
