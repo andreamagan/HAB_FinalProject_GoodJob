@@ -128,6 +128,7 @@ async function getProfile(uuid) {
   };
   const projection = {
     _id: 0,
+    __v: 0,
   };
 
   const profile = await PlayerModel.findOne(filter, projection).lean();

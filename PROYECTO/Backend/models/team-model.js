@@ -12,7 +12,7 @@ const teamSchema = new Schema({
     description: String,
     social: {
       twitterUrl: String,
-      twichUrl: String,
+      twitchUrl: String,
       instagramUrl: String,
       webUrl: String,
     },
