@@ -38,6 +38,7 @@ async function loginExecutor(credentials) {
       const jwtTokenExpiration = parseInt(process.env.AUTH_ACCESS_TOKEN_TTL, 10);
       const token = jwt.sign(payloadJwt, process.env.AUTH_JWT_SECRET, { expiresIn: jwtTokenExpiration });
       const response = {
+        uuid: payloadJwt.uuid,
         email,
         role,
         accessToken: token,
