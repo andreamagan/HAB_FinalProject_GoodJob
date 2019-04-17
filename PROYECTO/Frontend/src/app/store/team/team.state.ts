@@ -2,14 +2,14 @@ import { Store, State, Action, StateContext } from '@ngxs/store';
 import { tap, catchError } from 'rxjs/operators';
 import { Navigate } from '@ngxs/router-plugin';
 
-import { Player } from 'src/app/shared/models/player.models';
-import { PlayerService } from 'src/app/modules/profile/services/player.service';
-import { GetPlayerProfile, GetPlayerProfileSuccess, GetPlayerProfileFailed } from './player.actions';
+import { Team } from 'src/app/shared/models/team.models';
+import { TeamService } from 'src/app/modules/profile/services/team.service';
+import { GetTeamProfile, GetTeamProfileSuccess, GetTeamProfileFailed } from './team.actions';
 import { SetErrors } from '../error/error.actions';
 
 
-@State<Player>({
-  name: 'player',
+@State<Team>({
+  name: 'team',
   // defaults: {
   //   "personalInfo": {
   //     "social": {
@@ -56,24 +56,24 @@ import { SetErrors } from '../error/error.actions';
   // }
 })
 
-export class PlayerState {
-  constructor(private store: Store, private playerService: PlayerService) { }
+export class TeamState {
+  constructor(private store: Store, private playerService: TeamService) { }
 
-  @Action(GetPlayerProfile)
-  getPlayerProfile({ dispatch }: StateContext<Player>) {
-    return this.playerService.getPlayerProfile().pipe(
+  @Action(GetTeamProfile)
+  getTeamProfile({ dispatch }: StateContext<Team>) {
+    return this.playerService.getTeamProfile().pipe(
       tap(profileResponse =>
-        dispatch(new GetPlayerProfileSuccess(profileResponse))
+        dispatch(new GetTeamProfileSuccess(profileResponse))
       ),
-      catchError(error => dispatch(new GetPlayerProfileFailed(error.error))
+      catchError(error => dispatch(new GetTeamProfileFailed(error.error))
       )
     );
   }
 
-  @Action(GetPlayerProfileSuccess)
+  @Action(GetTeamProfileSuccess)
   getUserProfileSuccess(
-    { patchState }: StateContext<Player>,
-    { profile }: GetPlayerProfileSuccess
+    { patchState }: StateContext<Team>,
+    { profile }: GetTeamProfileSuccess
   ) {
     patchState({ ...profile });
   }

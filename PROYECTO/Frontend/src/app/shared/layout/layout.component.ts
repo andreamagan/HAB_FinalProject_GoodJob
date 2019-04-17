@@ -1,8 +1,9 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, Input } from '@angular/core';
 import { faLinkedin, faGithub, faBehance, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Store } from '@ngxs/store';
 import { Logout } from 'src/app/store/auth/auth.actions';
+
 
 
 @Component({
@@ -12,6 +13,8 @@ import { Logout } from 'src/app/store/auth/auth.actions';
 })
 
 export class LayoutComponent implements OnDestroy {
+  @Input() player;
+
   logotype = 'eSports Network';
   mobileQuery: MediaQueryList;
   fillerNav = Array.from({ length: 5 }, (_, i) => `Nav Item ${i + 1}`);

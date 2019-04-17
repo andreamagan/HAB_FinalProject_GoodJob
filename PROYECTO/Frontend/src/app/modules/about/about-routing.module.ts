@@ -6,7 +6,6 @@ import { AboutPage } from './page/about.page';
 const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
     children: [
       {
         path: 'about',

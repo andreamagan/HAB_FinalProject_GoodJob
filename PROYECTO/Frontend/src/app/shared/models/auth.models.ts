@@ -11,6 +11,7 @@ export interface LoginRequest {
 
 export interface LoginResponse {
   uuid: string;
+  email: string;
   role: string;
   expiresIn: number;
   accessToken: string;

@@ -15,6 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MaterialModule } from '../material/material.module';
 import { StoreModule } from '../store/store.module';
 import { ClickPreventDefaultDirective } from './directives/click-prevent-default.directive';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ClickPreventDefaultDirective } from './directives/click-prevent-default
     PageNotFoundComponent,
     LayoutComponent,
     ClickPreventDefaultDirective,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { ClickPreventDefaultDirective } from './directives/click-prevent-default
     PageNotFoundComponent,
     LayoutComponent,
     ClickPreventDefaultDirective,
+    LoaderComponent
   ]
 })
 export class SharedModule { }

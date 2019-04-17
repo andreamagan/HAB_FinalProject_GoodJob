@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Store } from '@ngxs/store';
+
 
 @Component({
   selector: 'esn-avatar',
@@ -6,18 +8,18 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./avatar.component.scss']
 })
 export class AvatarComponent {
-  avatarDefault = '';
-  teamDefault = '';
+  imageUrl = '';
+  teamDefault = '../../../../assets/team-default.png';
 
-  @Input()
-  set user(user: any) {
-    if (user.avatarUrl !== undefined) {
-      this.avatarDefault = user.avatarUrl || '../../../../assets/avatar.png'
-    }
-    if (user.team !== undefined) {
-      this.teamDefault = '../../../../assets/team-default.png'
-    }
-  }
-  constructor() { }
+  // @Input()
+  // set player(player: any) {
+  //   if (player.avatarUrl !== undefined) {
+  //     this.imageUrl =
+  //       player.avatarUrl || `https://api.adorable.io/avatars/128/${player.acountInfo.uuid}`;
+  //   }
+  // }
 
+  // if (user.team !== undefined) {
+  //   this.teamDefault = '../../../../assets/team-default.png'
+  // }
 }

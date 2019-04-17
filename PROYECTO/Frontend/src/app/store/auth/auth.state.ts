@@ -3,7 +3,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { Navigate } from '@ngxs/router-plugin';
 
 import { Auth } from 'src/app/shared/models/auth.models';
-import { AuthService } from 'src/app/modules/auth/auth.service';
+import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { Login, LoginSuccess, LoginFailed, Register, RegisterSuccess, RegisterFailed, Logout } from './auth.actions';
 import { SetErrors } from '../error/error.actions';
 

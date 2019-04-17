@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
-import { LoginRequest, LoginResponse } from '../../shared/models/auth.models';
+import { LoginRequest, LoginResponse } from '../../../shared/models/auth.models';
 
 @Injectable({
   providedIn: 'root'

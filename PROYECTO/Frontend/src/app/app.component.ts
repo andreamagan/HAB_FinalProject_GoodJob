@@ -9,7 +9,6 @@ import { GlobalState } from './store/global.state';
 })
 export class AppComponent {
   title = 'eSports-network';
-
   @Select(GlobalState.isFetching) isFetching$;
 
   constructor() { }

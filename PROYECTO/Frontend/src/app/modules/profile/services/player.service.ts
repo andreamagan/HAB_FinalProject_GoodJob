@@ -13,8 +13,8 @@ export class PlayerService {
     return this.http.get<Player>(`${environment.apiBaseUrl}/player`);
   }
 
-  updateUserProfile(profile: Player) {
-    return this.http.put<Player>(`${environment.apiBaseUrl}/user`, profile);
+  updatePlayerProfile(profile: Player) {
+    return this.http.put<Player>(`${environment.apiBaseUrl}/player`, profile);
   }
 
   uploadAvatar(image: File) {
@@ -27,4 +27,11 @@ export class PlayerService {
     });
   }
 
+  addTags(tags: []) {
+    return this.http.post(`${environment.apiBaseUrl}/player/tags`, tags);
+  }
+
+  deleteTags(tags: []) {
+    return this.http.post(`${environment.apiBaseUrl}/player/tags`, tags);
+  }
 }

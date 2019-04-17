@@ -17,7 +17,7 @@ import { WelcomeModule } from './modules/welcome/welcome.module';
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from './store/store.module';
 
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { GlobalState } from './store/global.state';
 
@@ -32,6 +32,15 @@ import { MaterialModule } from './material/material.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    NgxsReduxDevtoolsPluginModule.forRoot({
+      disabled: environment.production
+    }),
+    NgxsLoggerPluginModule.forRoot({ logger: console, collapsed: false }),
+    NgxsRouterPluginModule.forRoot(),
+    NgxsModule.forRoot([GlobalState], {
+      developmentMode: !environment.production
+    }),
     AboutModule,
     AuthModule,
     HomeModule,
@@ -41,16 +50,7 @@ import { MaterialModule } from './material/material.module';
     SharedModule,
     StoreModule,
     AppRoutingModule,
-    NgxsReduxDevtoolsPluginModule.forRoot({
-      disabled: environment.production
-    }),
-    NgxsLoggerPluginModule.forRoot({ logger: console, collapsed: false }),
-    NgxsRouterPluginModule.forRoot(),
-    NgxsModule.forRoot([GlobalState], {
-      developmentMode: !environment.production
-    }),
     HttpClientModule,
-    BrowserAnimationsModule,
     MaterialModule,
   ],
   providers: [],
