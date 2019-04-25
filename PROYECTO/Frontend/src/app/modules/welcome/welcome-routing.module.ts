@@ -4,19 +4,8 @@ import { WelcomePage } from './pages/welcome.page';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'welcome',
-    pathMatch: 'full'
-  },
-  {
-    path: '',
+    path: 'welcome',
     component: WelcomePage,
-    children: [
-      {
-        path: 'welcome',
-        component: WelcomePage,
-      }
-    ]
   }
 ];
 

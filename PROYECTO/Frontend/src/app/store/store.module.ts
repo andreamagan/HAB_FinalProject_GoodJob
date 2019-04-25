@@ -7,6 +7,8 @@ import { StoreRoutingModule } from './store-routing.module';
 import { AuthState } from './auth/auth.state';
 import { ErrorState } from './error/error.state';
 import { PlayerState } from './player/player.state'
+import { JobState } from './job/job.state';
+import { SearchState } from './search/search.state';
 //import { ProfileState } from './profile/profile.state';  
 
 @NgModule({
@@ -14,7 +16,7 @@ import { PlayerState } from './player/player.state'
   imports: [
     CommonModule,
     StoreRoutingModule,
-    NgxsModule.forFeature([AuthState, ErrorState, PlayerState]) //Añadir Profilestate
+    NgxsModule.forFeature([AuthState, ErrorState, PlayerState, JobState, SearchState]) //Añadir Profilestate
   ],
 
 })

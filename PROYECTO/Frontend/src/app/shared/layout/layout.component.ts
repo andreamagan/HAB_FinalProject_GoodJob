@@ -1,8 +1,12 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, Input } from '@angular/core';
 import { faLinkedin, faGithub, faBehance, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { Store } from '@ngxs/store';
+import { Store, Select } from '@ngxs/store';
 import { Logout } from 'src/app/store/auth/auth.actions';
+import { GetPlayerProfile } from 'src/app/store/player/player.actions';
+import { PlayerState } from 'src/app/store/player/player.state';
+import { Observable } from 'rxjs';
+import { Player } from '../models/player.models';
 
 
 
@@ -13,15 +17,14 @@ import { Logout } from 'src/app/store/auth/auth.actions';
 })
 
 export class LayoutComponent implements OnDestroy {
-  @Input() player;
 
-  logotype = 'eSports Network';
   mobileQuery: MediaQueryList;
-  fillerNav = Array.from({ length: 5 }, (_, i) => `Nav Item ${i + 1}`);
+  // fillerNav = Array.from({ length: 5 }, (_, i) => `Nav Item ${i + 1}`);
   private _mobileQueryListener: () => void;
 
-  name = 'Andrea';
-  nickName = 'AMR';
+  // @Select(PlayerState) player$: Observable<Player>;
+  // name = "";
+  // nickName = "";
 
   networks = [
     { id: 1, icon: faLinkedin, link: 'https://www.linkedin.com/in/andreamaganrey/' },
@@ -35,6 +38,11 @@ export class LayoutComponent implements OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
+
+  ngOnInit() {
+    this.store.dispatch(new GetPlayerProfile());
+  }
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }

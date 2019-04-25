@@ -1,9 +1,4 @@
-
-// .fullscreen{
-//  margin: 0;
-//  padding:0;
-// }
-.fullscreen:before{
+.background-img:before{
   content: "";
   position: fixed;
   width: 100vw;
@@ -13,9 +8,9 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  -webkit-filter: blur(3px);
-  -moz-filter: blur(3px);
-  filter: blur(2px);
+  // -webkit-filter: blur(3px);
+  // -moz-filter: blur(3px);
+  // filter: blur(2px);
 }
 
 .form-column{

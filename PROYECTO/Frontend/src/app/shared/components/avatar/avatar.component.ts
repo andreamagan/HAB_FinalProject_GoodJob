@@ -8,7 +8,9 @@ import { Store } from '@ngxs/store';
   styleUrls: ['./avatar.component.scss']
 })
 export class AvatarComponent {
-  imageUrl = '';
+  @Input() user;
+
+  avatarDefault = '../../../../assets/avatar.png';
   teamDefault = '../../../../assets/team-default.png';
 
   // @Input()

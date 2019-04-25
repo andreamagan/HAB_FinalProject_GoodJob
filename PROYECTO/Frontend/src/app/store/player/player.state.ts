@@ -78,6 +78,8 @@ export class PlayerState {
     patchState({ ...profile });
   }
 
-
-
+  @Action([GetPlayerProfileFailed])
+  error({ dispatch }: StateContext<Player>, { errors }: any) {
+    dispatch(new SetErrors(errors));
+  }
 }

@@ -24,8 +24,8 @@ export interface Social {
 export interface AccountInfo {
   email: string;
   password: string;
-  createdAt: Date;
-  activatedAt: Date;
+  createdAt: string;
+  activatedAt: string;
   verificationCode: string;
   uuid: string;
   role: string;

@@ -4,17 +4,17 @@
       <mat-icon>menu</mat-icon>
     </button>
     <img class="logo" src="../../../assets/good-job-logotipo-negativo.png" alt="good job logotipo" routerLink="/">
-    <esn-avatar></esn-avatar>
+    <esn-avatar class="header-avatar"></esn-avatar>
   </header>
 
 
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #snav [(opened)]="opened" [mode]="mobileQuery.matches ? 'over' : 'side'"
-      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="nav-list">
+      [fixedInViewport]="mobileQuery.matches" fixedTopGap="51" class="nav-list">
       <div class="me">
         <esn-avatar></esn-avatar>
-        <caption>{{name}}</caption>
-        <h6>{{nickName}}</h6>
+        <p>Pepe Perez</p>
+        <h6>Nick</h6>
       </div>
       <mat-divider></mat-divider>
       <mat-nav-list>
@@ -22,28 +22,24 @@
         <a mat-list-item routerLink="/profile" routerLinkActive="active">Profile</a>
         <a mat-list-item routerLink="/my-account" routerLinkActive="active">My Account</a>
         <mat-divider></mat-divider>
-        <a mat-list-item routerLink="/" routerLinkActive="active">Jobs</a>
+        <a mat-list-item routerLink="/job" routerLinkActive="active">Jobs</a>
         <mat-divider></mat-divider>
         <a mat-list-item (click)="logoutUser()">Logout</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="ly-content">
-      <p> Main content
-      </p>
       <router-outlet> </router-outlet>
-
+      <footer class="ly-footer">
+        <ul>
+          <li *ngFor="let network of networks">
+            <a href={{network.link}} target="_blank">
+              <fa-icon [icon]="network.icon"></fa-icon>
+            </a>
+          </li>
+        </ul>
+        <caption>Made with ❤ by Andrea Magán Rey</caption>
+        <a routerLink="/about">About</a>
+      </footer>
     </mat-sidenav-content>
 
   </mat-sidenav-container>
-
-  <footer class="ly-footer">
-    <ul>
-      <li *ngFor="let network of networks">
-        <a href={{network.link}} target="_blank">
-          <fa-icon [icon]="network.icon"></fa-icon>
-        </a>
-      </li>
-    </ul>
-    <caption>Made with ❤ by Andrea Magán Rey</caption>
-    <a routerLink="/about">About</a>
-  </footer>

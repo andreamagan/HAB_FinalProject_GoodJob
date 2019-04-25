@@ -1,48 +1,71 @@
 @import 'colors.scss';
 
-
 header, footer {
   background-color: $primary;
   color: $white;
- 
-}
-
-header, footer {
   display: grid;
-  grid-template: 80% 20%;
+  // grid-template: 80% 20%;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 1%;
-  max-height: 80px;
+  padding: 0.25rem;
+ // max-height: 80px;
 
   .mat-icon-button{
   align-self: center;
   }
+
   .logo {
     grid-column: auto;
     justify-self: center;
     align-self: center;
     max-height: 60px;
+    //min-height: 50px;
   }
 
-  esn-avatar {
-    margin-right: 1rem ;
+  .header-avatar {
+    width: 20%;
+    max-width: 60px;
+    min-width: 50px;
     justify-self: flex-end;
-    align-self: center;
+    margin: 0.2rem;
+    margin-right: 0.75rem;
+  }
+}
+
+.me{
+  padding: 1rem;
+  text-align: center;
+  ::ng-deep{
+    img{
+      width: 80%;
+    }
   }
 }
 
 .nav-list{
   padding: 1rem;
-
+  width: 200px;
+  color: $white;
+  background: linear-gradient(180deg, $pdark, $primary, $plight );
   mat-divider{
-    margin: 0.25rem;
+    border-top-color: $blue;
+    margin: 0.5rem;
+  }
+
+  .mat-nav-list .mat-list-item{
+    color: $white;
   }
 
   h6 {
     margin-bottom: 0.5rem;
   }
+}
 
-
+header {
+  z-index: 1;
+  box-sizing: border-box;
+  border-bottom: 2px solid $plight;
+  box-shadow: 0px 2px 2px #000000a1;
 }
 
 footer{
@@ -73,6 +96,11 @@ footer{
 
 //----------------------------------------------------------------------------------------------------------------------------
 // Borrame: esto es de material. Mejor no tocar
+
+.example-sidenav-container{
+  z-index: 0;
+}
+
 .example-container {
   display: flex;
   flex-direction: column;

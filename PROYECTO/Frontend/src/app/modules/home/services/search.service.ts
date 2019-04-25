@@ -18,7 +18,7 @@ export class SearchService {
       teams
     }
 
-    if (collection === 'jobs') {
+    if (collection === collection.jobs) {
       return this.http.get<SearchI>(`${environment.apiBaseUrl}/search/jobs`, { params: { keyword: text } });
     } else if (collection === collections.players) {
       return this.http.get<SearchI>(`${environment.apiBaseUrl}/search/players`, { params: { keyword: text } });

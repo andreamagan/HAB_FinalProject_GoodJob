@@ -1,0 +1,41 @@
+@import 'colors.scss';
+// .chip{
+//   // text-align: center;
+//   // padding: 0.2rem 1rem ;
+//   margin-right: 5px;
+//   // border: 2px solid gray;
+//   // border-radius: 30px ;
+// }
+
+.chip {
+  
+  display: flex;
+  align-items: center;
+  //width: 50vw;
+  // width: 90%;
+  margin: auto;
+  // max-width: 22em;
+
+  position: relative;
+  padding: 0.2rem 1rem;
+  box-sizing: border-box;
+
+  $border: 2px;
+  color: $primary;
+  background: $white;
+  background-clip: padding-box; /* !importanté */
+  border: solid $border transparent; /* !importanté */
+  border-radius: 1em;
+  margin: 0.25rem;
+  //border-radius: 30px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    margin: -$border; /* !importanté */
+    border-radius: inherit; /* !importanté */
+    background: linear-gradient(to right, $primary, $blue);
+  }
+}

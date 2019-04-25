@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedRoutingModule } from './shared-routing.module';
 import { AvatarComponent } from './components/avatar/avatar.component';
-import { SearchComponent } from './components/search/search.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { CardComponent } from './components/card/card.component';
 import { ListComponent } from './components/list/list.component';
@@ -16,11 +15,11 @@ import { MaterialModule } from '../material/material.module';
 import { StoreModule } from '../store/store.module';
 import { ClickPreventDefaultDirective } from './directives/click-prevent-default.directive';
 import { LoaderComponent } from './components/loader/loader.component';
+import { TagsComponent } from './components/tags/tags.component';
 
 @NgModule({
   declarations: [
     AvatarComponent,
-    SearchComponent,
     TabsComponent,
     CardComponent,
     ListComponent,
@@ -31,6 +30,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     LayoutComponent,
     ClickPreventDefaultDirective,
     LoaderComponent,
+    TagsComponent,
   ],
   imports: [
     CommonModule,
@@ -41,7 +41,6 @@ import { LoaderComponent } from './components/loader/loader.component';
   ],
   exports: [
     AvatarComponent,
-    SearchComponent,
     TabsComponent,
     CardComponent,
     ListComponent,
@@ -51,7 +50,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     PageNotFoundComponent,
     LayoutComponent,
     ClickPreventDefaultDirective,
-    LoaderComponent
+    LoaderComponent,
+    TagsComponent,
   ]
 })
 export class SharedModule { }
