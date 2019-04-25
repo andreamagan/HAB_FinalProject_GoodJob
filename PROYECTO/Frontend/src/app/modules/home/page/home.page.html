@@ -1,3 +1,26 @@
-<p>
-  home works!
-</p>
+<main class="content">
+
+  <section class="welcome" *ngIf="(currentUser$ | async) as currentUser">
+    <h4>Hi! <span> {{currentUser.personalInfo.fullName}}</span>!</h4>
+  </section>
+
+  <esn-search></esn-search>
+
+  <section class="search-results jobs">
+    <h5> Show results: </h5>
+    <div class="job-list">
+      <ng-container *ngFor="let item of (searchJobs$ | async)">
+        <esn-job-card [job]="item"></esn-job-card>
+      </ng-container>
+    </div>
+  </section>
+
+  <section class="jobs">
+    <h5> Last jobs</h5>
+    <div class="job-list">
+      <ng-container *ngFor="let job of (jobs$ | async)">
+        <esn-job-card [job]="job"></esn-job-card>
+      </ng-container>
+    </div>
+  </section>
+</main>

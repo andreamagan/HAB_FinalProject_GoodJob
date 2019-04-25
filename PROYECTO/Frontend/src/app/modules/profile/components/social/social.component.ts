@@ -10,10 +10,10 @@ import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
 export class SocialComponent {
   @Input() social;
 
-  networks = [
-    { id: 1, icon: faTwitch, link: this.social.twitchUrl },
-    { id: 2, icon: faInstagram, link: this.social.instagramUrl },
-    { id: 3, icon: faTwitter, link: this.social.twitterUrl },
-    { id: 4, icon: faGlobeAmericas, link: this.social.webUrl }
-  ];
+  twitterIcon = faTwitter;
+  twitchIcon = faTwitch;
+  webIcon = faGlobeAmericas;
+  //   icon: faInstagram, link: social.instagramUrl
+  //  icon: faTwitter, link: social.twitterUrl 
+  // icon: faGlobeAmericas, link: social.webUrl 
 }

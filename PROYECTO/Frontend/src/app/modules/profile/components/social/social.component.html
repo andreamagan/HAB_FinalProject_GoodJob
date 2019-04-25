@@ -1,9 +1,18 @@
 <div class="content">
-  <caption>Follow:</caption>
   <ul>
-    <li *ngFor="let network of networks">
-      <a href={{network.link}} target="_blank">
-        <fa-icon [icon]="network.icon"></fa-icon>
+    <li>
+      <a href={{social.twitchUrl}} target="_blank">
+        <fa-icon [icon]="twitchIcon"></fa-icon>
+      </a>
+    </li>
+    <li>
+      <a href={{social.twitterUrl}} target="_blank">
+        <fa-icon [icon]="twitterIcon"></fa-icon>
+      </a>
+    </li>
+    <li>
+      <a href={{social.webUrl}} target="_blank">
+        <fa-icon [icon]="webIcon"></fa-icon>
       </a>
     </li>
   </ul>

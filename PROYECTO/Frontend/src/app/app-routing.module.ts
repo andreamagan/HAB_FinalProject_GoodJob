@@ -4,9 +4,11 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 
 const routes: Routes = [
   {
-    path: '**',
-    component: PageNotFoundComponent
+    path: '',
+    redirectTo: 'welcome',
+    pathMatch: 'full',
   }
+
 ];
 
 @NgModule({
