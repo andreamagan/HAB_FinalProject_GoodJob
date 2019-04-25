@@ -27,8 +27,6 @@ async function checkJwtToken(authorization) {
     uuid: decoded.uuid,
     role: decoded.role,
   };
-  // borrame
-  console.log(claims);
   return claims;
 }
 

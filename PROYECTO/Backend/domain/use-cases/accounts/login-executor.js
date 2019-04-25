@@ -42,6 +42,7 @@ async function loginExecutor(credentials) {
         email,
         role,
         accessToken: token,
+        // `JWT ${token}`
         expiresIn: jwtTokenExpiration,
       };
       return response;

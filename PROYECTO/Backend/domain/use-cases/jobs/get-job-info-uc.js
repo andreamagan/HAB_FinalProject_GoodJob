@@ -8,7 +8,7 @@ async function jobInfoUC(jobId, authorization) {
   const { role } = await checkAuthorization(authorization);
 
   try {
-    const jobInfo = await jobRepository.getJobInfo(jobId);
+    const jobInfo = await jobRepository.getJobDetail(jobId);
     return jobInfo;
   } catch (e) {
     throw e;

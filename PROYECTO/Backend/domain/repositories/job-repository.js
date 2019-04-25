@@ -13,7 +13,7 @@ async function postJob(teamProfile, jobInputData) {
   const { shortName } = teamProfile.teamInfo;
   const { _id } = teamProfile;
   const uuid = uuidV4();
-  console.log(_id);
+  console.log('_id', _id);
 
   const jobData = {
     team: _id,
@@ -26,10 +26,10 @@ async function postJob(teamProfile, jobInputData) {
     applicants: [],
   };
 
-  console.log(jobData);
+  console.log('jobData', jobData);
 
   const jobPosted = await JobModel.create(jobData);
-  console.log(jobPosted);
+  console.log('jobPosted', jobPosted);
   return jobPosted;
 }
 
@@ -44,22 +44,27 @@ async function getJobApplicantsUuids(jobId) {
   };
 
   const applicantsResult = await JobModel.findOne(filter, projection).lean(); // [{ ...user1 }, { ...user2 }, ...{user n}]
-  console.log(applicantsResult);
+  console.log('applicants', applicantsResult);
   const applicantsUuids = applicantsResult.applicants;
 
   return applicantsUuids;
 }
 
-async function getJobInfo(jobId) {
+async function getJobDetail(jobId) {
+  const filter = {
+    jobId,
+  };
+
   const projection = {
     title: 1,
     description: 1,
     createdAt: 1,
+    deletedAt: 1,
     tags: 1,
     _id: 0,
   };
 
-  const jobInfo = await JobModel.find(jobId, projection).lean();
+  const [jobInfo] = await JobModel.find(filter, projection).lean();
   return jobInfo;
 }
 
@@ -100,7 +105,7 @@ async function getNewJobs() {
     deletedAt: null,
   };
 
-  const newJobs = await JobModel.find(filter).sort({ $natural: -1 }).limit(5);
+  const newJobs = await JobModel.find(filter).sort({ $natural: -1 }).limit(10);
   return newJobs;
 }
 
@@ -119,7 +124,7 @@ async function applyJob(jobId, uuid) {
 
 module.exports = {
   postJob,
-  getJobInfo,
+  getJobDetail,
   getJobApplicantsUuids,
   deleteJob,
   searchJobs,

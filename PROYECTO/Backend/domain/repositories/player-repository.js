@@ -87,7 +87,25 @@ async function checkIfActivatedAccount(email) {
   if (!result || [result] === undefined) {
     throw createNotFoundDataError();
   }
-  return null;
+  return true;
+}
+
+async function activateAccount(verificationCode, email) {
+  const now = new Date().toISOString().substring(0, 19).replace('T', ' ');
+  const filter = {
+    'accountInfo.email': email,
+    'accountInfo.verificationCode': verificationCode,
+  };
+
+  const update = {
+    $set: { activatedAt: now },
+  };
+
+  const activatedAccount = await PlayerModel.findOneAndUpdate(filter, update);
+  if (activatedAccount != null) {
+    return true;
+  }
+  return false;
 }
 
 async function checkIfCorrectPassword(email, password) {

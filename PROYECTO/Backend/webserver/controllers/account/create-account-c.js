@@ -3,10 +3,10 @@
 const createAccountUC = require('../../../domain/use-cases/accounts/create-account-uc');
 
 async function createAccountController(req, res, next) {
-  const acountData = { ...req.body };
+  const accountData = { ...req.body };
 
   try {
-    await createAccountUC(acountData);
+    await createAccountUC(accountData);
     return res.status(201).json();
   } catch (e) {
     return next(e);

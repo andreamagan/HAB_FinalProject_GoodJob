@@ -11,7 +11,7 @@ const getJobApplicants = require('../controllers/jobs/get-job-applicants-c.js');
 // // const rejectJobApplicants = require();
 
 const getNewJobs = require('../controllers/jobs/get-new-jobs-c');
-const getJobInfo = require('../controllers/jobs/get-job-info-c');
+const getJobDetail = require('../controllers/jobs/get-job-info-c');
 
 const applyJob = require('../controllers/jobs/apply-job-c');
 
@@ -24,7 +24,7 @@ router.get('/job/applicants', getJobApplicants);
 // // router.put('/job/applicants', rejectJobApplicants);
 
 router.get('/jobs', getNewJobs);
-router.get('/job', getJobInfo);
+router.get('/job', getJobDetail);
 
 router.put('/job/apply', applyJob);
 

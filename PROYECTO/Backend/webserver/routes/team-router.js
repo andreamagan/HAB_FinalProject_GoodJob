@@ -15,6 +15,6 @@ router.get('/team', getTeamProfile);
 router.put('/team', updateTeamProfile);
 router.post('/team/avatar', upload.single('avatar'), uploadAvatar);
 
-router.get('/search/team', searchTeams);
+// router.get('/search/team', searchTeams); // TODO: Refactor
 
 module.exports = router;

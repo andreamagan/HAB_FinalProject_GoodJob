@@ -7,8 +7,8 @@ async function applyJobController(req, res, next) {
   const { authorization } = req.headers;
 
   try {
-    const applicants = await applyJobUC(jobId, authorization);
-    return res.status(200).send(applicants);
+    await applyJobUC(jobId, authorization);
+    return res.status(200).send();
   } catch (e) {
     return next(e);
   }

@@ -1,14 +1,14 @@
 'use strict';
 
-const getJobInfoUC = require('../../../domain/use-cases/jobs/get-job-info-uc');
+const getJobDetailUC = require('../../../domain/use-cases/jobs/get-job-info-uc');
 
-async function getJobInfoController(req, res, next) {
+async function getJobDetailController(req, res, next) {
   const { jobId } = req.query;
-  console.log(jobId);
+  console.log('jobId', jobId);
   const { authorization } = req.headers;
 
   try {
-    const jobInfo = await getJobInfoUC(jobId, authorization);
+    const jobInfo = await getJobDetailUC(jobId, authorization);
 
     return res.status(200).send(jobInfo);
   } catch (e) {
@@ -16,4 +16,4 @@ async function getJobInfoController(req, res, next) {
   }
 }
 
-module.exports = getJobInfoController;
+module.exports = getJobDetailController;

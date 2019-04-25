@@ -10,8 +10,6 @@ const uploadAvatar = require('../controllers/users/players/update-player-avatar-
 const addTags = require('../controllers/users/players/add-tags-c');
 const deleteTags = require('../controllers/users/players/delete-tags-c');
 
-const searchPlayers = require('../controllers/users/players/search-players-c');
-
 const upload = multer();
 const router = express.Router();
 
@@ -21,6 +19,7 @@ router.post('/player/avatar', upload.single('avatar'), uploadAvatar);
 // router.patch('/player/background', updateBackground);
 router.post('/player/tags', addTags);
 router.delete('/player/tags', deleteTags);
-router.get('/search', searchPlayers);
+
+// router.get('/search', searchPlayers);// TODO: Refactor
 
 module.exports = router;
