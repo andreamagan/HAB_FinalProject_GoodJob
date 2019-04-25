@@ -8,9 +8,7 @@ import { SetErrors } from '../error/error.actions';
 @State<SearchI>({
   name: 'search',
   defaults: {
-    searchJobs: [],
-    searchPlayers: [],
-    searchTeams: []
+    results: []
   }
 })
 
@@ -18,8 +16,8 @@ export class SearchState {
   constructor(private store: Store, private searchService: SearchService) { }
 
   @Selector()
-  static searchJobs({ searchJobs }: SearchI) {
-    return [...searchJobs];
+  static search({ results }: SearchI) {
+    return [...results];
   }
 
   @Action(Search)
@@ -35,11 +33,11 @@ export class SearchState {
   }
 
   @Action(SearchSuccess)
-  searchJobsSuccess(
+  searchSuccess(
     { patchState }: StateContext<SearchI>,
     { results }: SearchSuccess) {
     patchState({
-      searchJobs: results
+      results
     });
   }
 

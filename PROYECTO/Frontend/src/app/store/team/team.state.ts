@@ -4,7 +4,7 @@ import { Navigate } from '@ngxs/router-plugin';
 
 import { Team } from 'src/app/shared/models/team.models';
 import { TeamService } from 'src/app/modules/profile/services/team.service';
-import { GetTeamProfile, GetTeamProfileSuccess, GetTeamProfileFailed } from './team.actions';
+import { GetTeamProfile, GetTeamProfileFailed, GetTeamProfileSuccess } from './team.actions';
 import { SetErrors } from '../error/error.actions';
 
 
@@ -57,13 +57,12 @@ import { SetErrors } from '../error/error.actions';
 })
 
 export class TeamState {
-  constructor(private store: Store, private playerService: TeamService) { }
+  constructor(private store: Store, private teamService: TeamService) { }
 
   @Action(GetTeamProfile)
   getTeamProfile({ dispatch }: StateContext<Team>) {
-    return this.playerService.getTeamProfile().pipe(
-      tap(profileResponse =>
-        dispatch(new GetTeamProfileSuccess(profileResponse))
+    return this.teamService.getTeamProfile().pipe(
+      tap(profileResponse => dispatch(new GetTeamProfileSuccess(profileResponse))
       ),
       catchError(error => dispatch(new GetTeamProfileFailed(error.error))
       )
@@ -71,13 +70,14 @@ export class TeamState {
   }
 
   @Action(GetTeamProfileSuccess)
-  getUserProfileSuccess(
+  getTeamProfileSuccess(
     { patchState }: StateContext<Team>,
     { profile }: GetTeamProfileSuccess
   ) {
     patchState({ ...profile });
   }
-
-
-
+  @Action([GetTeamProfileFailed])
+  error({ dispatch }: StateContext<Team>, { errors }: any) {
+    dispatch(new SetErrors(errors));
+  }
 }

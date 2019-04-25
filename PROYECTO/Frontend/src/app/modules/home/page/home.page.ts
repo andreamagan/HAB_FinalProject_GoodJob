@@ -18,9 +18,7 @@ import { SearchI } from 'src/app/shared/models/search.models';
 export class HomePage {
   @Select(PlayerState) currentUser$: Observable<Player>;
   @Select(JobState.getNewJobs) jobs$: Observable<Jobs>;
-  @Select(SearchState.searchJobs) searchJobs$: Observable<SearchI>;
-
-
+  @Select(SearchState.search) search$: Observable<SearchI>;
 
   constructor(private store: Store) { }
 

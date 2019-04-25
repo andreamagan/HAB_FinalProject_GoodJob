@@ -6,6 +6,8 @@ import { Auth } from 'src/app/shared/models/auth.models';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { Login, LoginSuccess, LoginFailed, Register, RegisterSuccess, RegisterFailed, Logout } from './auth.actions';
 import { SetErrors } from '../error/error.actions';
+import { GetPlayerProfile } from '../player/player.actions';
+import { GetTeamProfile } from '../team/team.actions';
 
 
 @State<Auth>({
@@ -32,6 +34,12 @@ export class AuthState {
     { loginResponse }: LoginSuccess
   ) {
     patchState({ ...loginResponse });
+
+    if (loginResponse.role !== "player") {
+      dispatch(new GetTeamProfile());
+    } else {
+      dispatch(new GetPlayerProfile());
+    }
 
     dispatch(new Navigate(['/home']));
   }

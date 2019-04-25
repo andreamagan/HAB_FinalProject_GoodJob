@@ -7,7 +7,7 @@ export class GetTeamProfile {
 }
 
 export class GetTeamProfileSuccess {
-  static readonly type = '[Team] GetTeamProfileSucces';
+  static readonly type = '[Team] GetTeamProfileSuccess';
   constructor(public profile: Team) { }
 }
 

@@ -16,7 +16,7 @@
 
 export class Search {
   static readonly type = '[Search] Search';
-  constructor(public keyword: string, public collection?: string) { }
+  constructor(public keyword: string, public collection?: number) { }
 }
 
 export class SearchSuccess {

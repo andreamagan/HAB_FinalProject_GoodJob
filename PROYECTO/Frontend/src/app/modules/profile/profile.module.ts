@@ -9,9 +9,11 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NickAnimationComponent } from './components/nick-animation/nick-animation.component';
+import { TeamComponent } from './components/team/team.component';
+
 
 @NgModule({
-  declarations: [PlayerComponent, ProfilePage, SocialComponent, NickAnimationComponent],
+  declarations: [PlayerComponent, TeamComponent, ProfilePage, SocialComponent, NickAnimationComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,

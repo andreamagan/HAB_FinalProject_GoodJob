@@ -10,6 +10,7 @@ export class TeamService {
   constructor(private http: HttpClient) { }
 
   getTeamProfile() {
+    console.log('hola');
     return this.http.get<Team>(`${environment.apiBaseUrl}/team`);
   }
 

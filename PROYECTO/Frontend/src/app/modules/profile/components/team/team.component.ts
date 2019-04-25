@@ -1,16 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { PlayerState } from 'src/app/store/player/player.state';
-import { Player } from 'src/app/shared/models/player.models';
 import { Observable } from 'rxjs';
+import { Team } from 'src/app/shared/models/team.models';
+import { TeamState } from 'src/app/store/team/team.state';
 
 @Component({
-  selector: 'esn-player',
-  templateUrl: './player.component.html',
-  styleUrls: ['./player.component.scss']
+  selector: 'esn-team',
+  templateUrl: './team.component.html',
+  styleUrls: ['./team.component.scss']
 })
-export class PlayerComponent implements OnInit {
-  @Select(PlayerState) player$: Observable<Player>;
+
+export class TeamComponent implements OnInit {
+  @Select(TeamState) team$: Observable<Team>;
 
   constructor() { }
 

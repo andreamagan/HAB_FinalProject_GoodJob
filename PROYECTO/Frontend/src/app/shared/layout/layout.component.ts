@@ -40,7 +40,6 @@ export class LayoutComponent implements OnDestroy {
   }
 
   ngOnInit() {
-    this.store.dispatch(new GetPlayerProfile());
   }
 
   ngOnDestroy(): void {

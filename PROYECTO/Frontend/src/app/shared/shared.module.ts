@@ -16,6 +16,8 @@ import { StoreModule } from '../store/store.module';
 import { ClickPreventDefaultDirective } from './directives/click-prevent-default.directive';
 import { LoaderComponent } from './components/loader/loader.component';
 import { TagsComponent } from './components/tags/tags.component';
+import { JobCardComponent } from './components/job-card/job-card.component';
+import { PlayerCardComponent } from './components/player-card/player-card.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { TagsComponent } from './components/tags/tags.component';
     ClickPreventDefaultDirective,
     LoaderComponent,
     TagsComponent,
+    JobCardComponent,
+    PlayerCardComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +56,8 @@ import { TagsComponent } from './components/tags/tags.component';
     ClickPreventDefaultDirective,
     LoaderComponent,
     TagsComponent,
+    JobCardComponent,
+    PlayerCardComponent,
   ]
 })
 export class SharedModule { }

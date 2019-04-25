@@ -1,5 +1,8 @@
 export interface SearchI {
-  searchJobs: [],
-  searchPlayers: [],
-  searchTeams: []
+  results: [],
+}
+export enum collections {
+  jobs,
+  players,
+  teams
 }

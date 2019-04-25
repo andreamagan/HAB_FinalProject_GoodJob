@@ -19,16 +19,14 @@ export class SearchComponent implements OnInit {
       .pipe(
         debounceTime(300),
         map((event: any) => event.target.value),
-        //filter(text => text.length > 2),
         distinctUntilChanged(),
-        switchMap((s, c) => this.store.dispatch(new Search(s)))
-        //si pongo Search(s,c)  me da el error:ERROR in src/app/modules/home/components/search/search.component.ts(24,63): error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+        switchMap((s, c) => this.store.dispatch(new Search(s, c)))
       )
       .subscribe();
   }
 
   search(event) {
-    const collection = "jobs"
-    this.store.dispatch(new Search(event.target.value, collection))
+    const x = 1;
+    this.store.dispatch(new Search(event.target.value, x))
   }
 }

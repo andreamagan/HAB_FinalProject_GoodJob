@@ -38,9 +38,16 @@
   </div>
 
   <div class="background">
-    <p class="overline">background</p>
-    <div>{{player.background.education}}</div>
-    <div>{{player.background.experience}}</div>
+    <p class="overline">Active jobs</p>
+    <section class="jobs">
+      <h5> GOT SKILLS WE’RE LOOKING FOR?</h5>
+      <div class="job-list">
+        <ng-container *ngFor="let job of team.jobs">
+          <esn-job-card [job]="job"></esn-job-card>
+        </ng-container>
+      </div>
+    </section>
+
   </div>
 
 </div>
