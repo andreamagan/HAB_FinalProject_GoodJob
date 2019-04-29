@@ -1,10 +1,9 @@
 'use strict';
 
-const getJobDetailUC = require('../../../domain/use-cases/jobs/get-job-info-uc');
+const getJobDetailUC = require('../../../domain/use-cases/jobs/get-job-detail-uc');
 
 async function getJobDetailController(req, res, next) {
   const { jobId } = req.query;
-  console.log('jobId', jobId);
   const { authorization } = req.headers;
 
   try {

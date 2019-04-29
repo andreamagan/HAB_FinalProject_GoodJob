@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const playerSchema = new Schema({
-  personalInfo: {
+  profileInfo: {
     fullName: String,
     nickName: String,
     description: String,
@@ -14,6 +14,7 @@ const playerSchema = new Schema({
       twitterUrl: String,
       twitchUrl: String,
       instagramUrl: String,
+      webUrl: String,
     },
   },
   accountInfo: {
@@ -31,6 +32,7 @@ const playerSchema = new Schema({
   tags: [String],
   avatarUrl: String,
   team: String,
+  jobs: [],
 
   background: {
     experience: [{
@@ -50,9 +52,9 @@ const playerSchema = new Schema({
 
 playerSchema.index(
   {
-    'personalInfo.fullName': 'text',
-    'personalInfo.nickName': 'text',
-    'personalInfo.description': 'text',
+    'profileInfo.fullName': 'text',
+    'profileInfo.nickName': 'text',
+    'profileInfo.description': 'text',
     tags: 'text',
   },
 );

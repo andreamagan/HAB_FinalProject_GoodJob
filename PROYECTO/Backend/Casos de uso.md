@@ -9,9 +9,12 @@
 * Create uuid - uuidv4
 * Create User Profile - PlayerModel
 * Insert into data base - mongo pool
-* Send verification email - mailchimp
+* Send verification email - Sendgrid
 
-## 2 Log IN 🍐
+## 2 Activate Account 
+> GET /account/acctivate
+
+## 3 Log IN 🍐
 > POST /account/login
 
 * Validate input data - Joi
@@ -47,8 +50,8 @@
 ## 6 Delete tags 🍐
 > DELETE/player/tags
 
-## 7 Job application status 🍓
-> GET/player/job-aplication
+## 7 Job applications status 🍓
+> GET/player/job-status
 
 <br />
 
@@ -95,7 +98,7 @@
 ## 5 Reject applicants 🍓
 > DELETE /job/applicants
 
-## 1 Get job info🍐
+## 1 Get job detail🍐
 > GET /job
 
 ## 2 Apply to job 🍓
@@ -108,10 +111,10 @@
 
 <br />
 
-# Home
+# Search
 
-## 1 Show last jobs 🍐
-> GET /jobs
+## 1 Search Teams by tag, shortName or Full Name 🍐
+> GET /search/teams
 
 ## 2 Search Jobs by tag, title, description  🍐
 > GET /seach/jobs

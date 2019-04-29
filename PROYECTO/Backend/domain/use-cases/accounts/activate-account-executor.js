@@ -3,27 +3,16 @@
 const playerRepository = require('../../repositories/player-repository');
 const teamRepository = require('../../repositories/team-repository');
 
-async function activateAccountExecutor(userData) {
-  const { role, email, uuid } = userData;
-
-  if (role === 'player') {
-    try {
-      const isActivate = await playerRepository.checkIfActivatedAccount(email);
-      if (!isActivate) {
-        await playerRepository.activateAccount(uuid);
-      }
-    } catch (e) {
-      throw e;
+async function activateAccountExecutor(verificationData) {
+  const { role, email, verificationCode } = verificationData;
+  try {
+    if (role === 'player') {
+      const a = await playerRepository.activateAccount(verificationCode, email);
+      return a;
     }
-  } else {
-    try {
-      const isActivate = await teamRepository.checkIfActivatedAccount(email);
-      if (!isActivate) {
-        await teamRepository.activateAccount(uuid);
-      }
-    } catch (e) {
-      throw e;
-    }
+    return await teamRepository.activateAccount(verificationCode, email);
+  } catch (e) {
+    throw (e);
   }
 }
 

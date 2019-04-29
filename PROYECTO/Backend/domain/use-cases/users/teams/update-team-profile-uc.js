@@ -8,9 +8,9 @@ const teamRepository = require('../../../repositories/team-repository');
 
 async function validate(payload) {
   const schema = {
-    teamInfo: ({
+    profileInfo: ({
       fullNameTeam: Joi.string().min(3).max(128).required(),
-      shortName: Joi.string().max(3).required(),
+      nickName: Joi.string().max(3).required(),
       description: Joi.string().allow(null),
       social: ({
         twitterUrl: Joi.string().uri().allow(null),

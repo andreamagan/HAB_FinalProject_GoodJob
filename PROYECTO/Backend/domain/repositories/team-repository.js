@@ -15,11 +15,11 @@ async function insertUserAccountInDB(userData) {
   } = userData;
 
   const teamProfileData = {
-    teamInfo: {
+    profileInfo: {
       fullName: null,
-      shortName: null,
+      nickName: null,
       description: null,
-      rrss: {
+      social: {
         twitterUrl: null,
         twichUrl: null,
         instagramUrl: null,
@@ -72,6 +72,25 @@ async function checkIfActivatedAccount(email) {
     throw createNotFoundDataError();
   }
   return null;
+}
+
+async function activateAccount(verificationCode, email) {
+  const now = new Date().toISOString().substring(0, 19).replace('T', ' ');
+  const filter = {
+    'accountInfo.email': email,
+    'accountInfo.verificationCode': verificationCode,
+    'accountInfo.activatedAt': null,
+  };
+  console.log(filter);
+  const update = {
+    $set: { 'accountInfo.activatedAt': now },
+  };
+
+  const activatedAccount = await TeamModel.findOneAndUpdate(filter, update);
+  if (activatedAccount != null) {
+    return true;
+  }
+  return false;
 }
 
 async function checkIfCorrectPassword(email, password) {
@@ -157,7 +176,6 @@ async function updateAvatar(file, uuid) {
     crop: 'limit',
   }, async(err, result) => {
     if (err) {
-      console.error('hubo error', err);
       throw err;
     }
 
@@ -204,8 +222,9 @@ async function searchTeams(keyword) {
 
 module.exports = {
   insertUserAccountInDB,
-  checkIfActivatedAccount,
   checkIfUserAccountExist,
+  checkIfActivatedAccount,
+  activateAccount,
   checkIfCorrectPassword,
   getUserAccountInfo,
   getProfile,

@@ -3,11 +3,13 @@
 const activateAccountUC = require('../../../domain/use-cases/accounts/activate-account-uc');
 
 async function activateAccountController(req, res, next) {
-  const [verificationCode, role, uuid, email] = { ...req.query };
-  console.log('activatecontroller', verificationCode, role, uuid, email);
+  const verificationData = { ...req.query };
   try {
-    await activateAccountUC(verificationCode, role, uuid, email);
-    return res.status(201).json();
+    const activate = await activateAccountUC(verificationData);
+    if (activate) {
+      return res.redirect(`${process.env.HTTP_FRONT_DOMAIN}/welcome`);
+    }
+    return res.send('Something was wrong');
   } catch (e) {
     return next(e);
   }

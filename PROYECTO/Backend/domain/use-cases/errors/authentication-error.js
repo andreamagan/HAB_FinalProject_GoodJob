@@ -5,6 +5,7 @@ class AuthenticatedError extends Error {
     super();
     this.name = 'AuthenticatedError';
     this.message = message;
+    this.status = 401;
   }
 }
 

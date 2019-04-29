@@ -10,14 +10,14 @@ async function postJob(teamProfile, jobInputData) {
     .substring(0, 19)
     .replace('T', ' ');
   const { title, description, tags } = jobInputData;
-  const { shortName } = teamProfile.teamInfo;
+  const { nickName } = teamProfile.profileInfo;
   const { _id } = teamProfile;
   const uuid = uuidV4();
   console.log('_id', _id);
 
   const jobData = {
     team: _id,
-    jobId: `${shortName}_${uuid}`,
+    jobId: `${nickName}_${uuid}`,
     title,
     description,
     createdAt: now,
@@ -56,11 +56,14 @@ async function getJobDetail(jobId) {
   };
 
   const projection = {
+    team: 1,
+    jobId: 1,
     title: 1,
     description: 1,
     createdAt: 1,
     deletedAt: 1,
     tags: 1,
+    applicants: 1,
     _id: 0,
   };
 

@@ -15,14 +15,15 @@ async function insertUserAccountInDB(userData) {
   } = userData;
 
   const playerProfileData = {
-    personalInfo: {
-      fullName: null,
-      nickName: null,
-      description: null,
+    profileInfo: {
+      fullName: 'Your Awesome Name',
+      nickName: 'GJWP',
+      description: 'Write something about yourself...or whatever you want to say',
       social: {
         twitterUrl: null,
-        twichUrl: null,
+        twitchUrl: null,
         instagramUrl: null,
+        webUrl: null,
       },
     },
     accountInfo: {
@@ -35,7 +36,7 @@ async function insertUserAccountInDB(userData) {
       role,
     },
     tags: [],
-    avatarUrl: null,
+    avatarUrl: 'https://avatars.dicebear.com/v2/avataaars/44a11a4c6db67df7642a2172e27e3959.svg',
     team: null,
 
     background: {
@@ -70,7 +71,7 @@ async function checkIfUserAccountExist(email) {
   const [result] = await PlayerModel.find(filter);
 
   if (!result || [result] === undefined) {
-    throw createNotFoundDataError();
+    throw createNotFoundDataError("Account doesn't exist");
   }
   return null;
 }
@@ -85,7 +86,7 @@ async function checkIfActivatedAccount(email) {
   const [result] = await PlayerModel.find(filter);
 
   if (!result || [result] === undefined) {
-    throw createNotFoundDataError();
+    throw createNotFoundDataError("Account doesn't activated yet");
   }
   return true;
 }
@@ -95,10 +96,11 @@ async function activateAccount(verificationCode, email) {
   const filter = {
     'accountInfo.email': email,
     'accountInfo.verificationCode': verificationCode,
+    'accountInfo.activatedAt': null,
   };
-
+  console.log(filter);
   const update = {
-    $set: { activatedAt: now },
+    $set: { 'accountInfo.activatedAt': now },
   };
 
   const activatedAccount = await PlayerModel.findOneAndUpdate(filter, update);
@@ -123,7 +125,7 @@ async function checkIfCorrectPassword(email, password) {
   const correctPassword = await bcrypt.compare(password, secretPassword);
 
   if (correctPassword === false) {
-    throw new Error('la contraseña es invalida');
+    throw new Error('invalid password');
   }
   return null;
 }
@@ -165,8 +167,8 @@ async function getApplicantProfile(applicantsUuids) {
   const projectionApplicantsData = {
     'accountInfo.uuid': 1,
     avatarUrl: 1,
-    'personalInfo.fullName': 1,
-    'personalInfo.nickName': 1,
+    'profileInfo.fullName': 1,
+    'profileInfo.nickName': 1,
     tags: 1,
     _id: 0,
   };
@@ -192,46 +194,6 @@ async function updateProfile(uuid, userData) {
 }
 
 
-const cloudName = process.env.CLOUDINARI_CLOUD_NAME;
-const apiKey = process.env.CLOUDINARI_API_KEY;
-const apiSecret = process.env.CLOUDINARI_API_SECRET;
-
-cloudinary.config({
-  cloud_name: cloudName,
-  api_key: apiKey,
-  api_secret: apiSecret,
-});
-
-async function updateAvatar(file, uuid) {
-  if (!file.buffer) {
-    throw new Error();
-  }
-
-  cloudinary.v2.uploader.upload_stream({
-    resource_type: 'raw',
-    public_id: uuid,
-    width: 200,
-    height: 200,
-    format: 'jpg',
-    crop: 'limit',
-  }, async(err, result) => {
-    if (err) {
-      console.error('hubo error', err);
-      throw err;
-    }
-
-    const {
-      secure_url: avatarUrl,
-    } = result;
-
-    const filter = {
-      'accountInfo.uuid': uuid,
-    };
-
-    await PlayerModel.updateOne(filter, { avatarUrl });
-  }).end(file.buffer);
-}
-
 async function addTags(userTags, uuid) {
   const tags = Object.values(userTags);
   const filter = {
@@ -243,7 +205,6 @@ async function addTags(userTags, uuid) {
   await PlayerModel.findOneAndUpdate(filter, update);
   return null;
 }
-
 
 async function deleteTags(userTags, uuid) {
   const tags = Object.values(userTags);
@@ -280,10 +241,58 @@ async function searchPlayers(keyword) {
   return players;
 }
 
+const cloudName = process.env.CLOUDINARI_CLOUD_NAME;
+const apiKey = process.env.CLOUDINARI_API_KEY;
+const apiSecret = process.env.CLOUDINARI_API_SECRET;
+
+cloudinary.config({
+  cloud_name: cloudName,
+  api_key: apiKey,
+  api_secret: apiSecret,
+});
+
+
+function uploadToCloudinary(file, uuid) {
+  if (!file.buffer) {
+    throw new Error();
+  }
+
+  cloudinary.v2.uploader.upload_stream({
+    resource_type: 'raw',
+    public_id: uuid,
+    width: 200,
+    height: 200,
+    format: 'jpg',
+    crop: 'limit',
+  }, (err, result) => {
+    if (err) {
+      throw (err);
+    }
+    const {
+      secure_url: avatarUrl,
+    } = result;
+
+    const filter = {
+      'accountInfo.uuid': uuid,
+    };
+
+    PlayerModel.updateOne(filter, { avatarUrl });
+    return avatarUrl;
+  }).end(file.buffer);
+}
+
+
+async function updateAvatar(file, uuid) {
+  return new Promise((resolve, reject) => {
+    uploadToCloudinary(file, uuid, () => resolve(console.log('fue bien')));
+    reject(console.log('fue mal'));
+  });
+}
 
 module.exports = {
   insertUserAccountInDB,
   checkIfActivatedAccount,
+  activateAccount,
   checkIfUserAccountExist,
   checkIfCorrectPassword,
   getUserAccountInfo,
@@ -294,4 +303,5 @@ module.exports = {
   addTags,
   deleteTags,
   searchPlayers,
+
 };

@@ -5,7 +5,6 @@ const Joi = require('joi');
 const uuidV4 = require('uuid/v4');
 const sgMail = require('@sendgrid/mail');
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const createAccountExecutor = require('../accounts/create-account-executor');
 
@@ -23,19 +22,22 @@ async function validateData(payload) {
 
 
 async function sendEmailActivateAccount(role, email, verificationCode) {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
   const msg = {
     to: email,
     from: {
-      email: 'andrea.magan@outlook.com',
+      email: 'goodjob.amr@gmail.com',
       name: 'Andrea from GoodJob',
     },
-    subject: 'Activate your account now!',
-    text: 'we need validate you are a fantastic human',
-    html: `To confirm the account <a href="${process.env.HTTP_SERVER_DOMAIN}/api/account/activate?verification_code=${verificationCode}?role=${role}">activate it here</a>`,
+    dynamic_template_data: {
+      email,
+      url: `${process.env.HTTP_SERVER_DOMAIN}/api/account/activate?verificationCode=${verificationCode}&role=${role}&email=${email}`,
+    },
+    template_id: process.env.SENDGRID_TEMPLATE_ID,
   };
   sgMail.send(msg);
 }
-
 
 async function createAccountUC(accountData) {
   const { email, password, role } = accountData;

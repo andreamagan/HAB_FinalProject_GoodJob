@@ -19,7 +19,6 @@ router.post('/player/avatar', upload.single('avatar'), uploadAvatar);
 // router.patch('/player/background', updateBackground);
 router.post('/player/tags', addTags);
 router.delete('/player/tags', deleteTags);
-
-// router.get('/search', searchPlayers);// TODO: Refactor
+// router.get('/player/jobs-status', getJobsStatus);
 
 module.exports = router;

@@ -3,10 +3,9 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const { ObjectId } = Schema;
 
 const jobSchema = new Schema({
-  team: ObjectId,
+  team: String,
   jobId: String,
   title: String,
   description: String,

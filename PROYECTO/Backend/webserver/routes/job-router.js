@@ -11,7 +11,7 @@ const getJobApplicants = require('../controllers/jobs/get-job-applicants-c.js');
 // // const rejectJobApplicants = require();
 
 const getNewJobs = require('../controllers/jobs/get-new-jobs-c');
-const getJobDetail = require('../controllers/jobs/get-job-info-c');
+const getJobDetail = require('../controllers/jobs/get-job-detail-c');
 
 const applyJob = require('../controllers/jobs/apply-job-c');
 
