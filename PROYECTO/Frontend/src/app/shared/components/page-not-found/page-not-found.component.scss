@@ -1,0 +1,43 @@
+ @import 'colors.scss';
+ 
+ div.background-img:before{
+    content: "";
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-image:url(https://eu.lolesports.com/darkroom/1266/d1a745dfa181420f4f70ac624407fbfd:7ed0efa8ee88b07357b57f22048e6537);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; 
+    
+}
+
+.not-found {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+
+
+  .content{
+    text-align: center;
+    color: white;
+    padding-top: 0.5rem; 
+    h1 {
+      font-size: 10rem;
+      font-weight: bolder;
+      color: $blue;
+      span:nth-child(2){
+        color: $orange;
+      }
+    }
+
+
+  }
+   
+  }
+ 

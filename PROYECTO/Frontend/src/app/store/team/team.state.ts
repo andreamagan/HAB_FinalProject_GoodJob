@@ -4,56 +4,14 @@ import { Navigate } from '@ngxs/router-plugin';
 
 import { Team } from 'src/app/shared/models/team.models';
 import { TeamService } from 'src/app/modules/profile/services/team.service';
-import { GetTeamProfile, GetTeamProfileFailed, GetTeamProfileSuccess } from './team.actions';
+import { GetTeamProfile, GetTeamProfileFailed, GetTeamProfileSuccess, UpdateTeamProfileFailed, UpdateTeamProfile, UpdateTeamProfileSuccess } from './team.actions';
 import { SetErrors } from '../error/error.actions';
+import { Logout } from '../auth/auth.actions';
+
 
 
 @State<Team>({
   name: 'team',
-  // defaults: {
-  //   "personalInfo": {
-  //     "social": {
-  //       "twitterUrl": null,
-  //       "twichUrl": null,
-  //       "instagramUrl": null
-  //     },
-  //     "fullName": 'Default name',
-  //     "nickName": 'Default nickname',
-  //     "description": 'Default description'
-  //   },
-  //   "tags": [],
-  //   "accountInfo": {
-  //     "email": "src\assets\avatar.png",
-  //     "password": null,
-  //     "createdAt": null,
-  //     "activatedAt": null,
-  //     "verificationCode": null,
-  //     "uuid": null,
-  //     "role": null,
-  //   },
-  //   "avatarUrl": null,
-  //   "team": 'GJD',
-  //   "background": {
-  //     "experience": [
-  //       {
-  //         "_id": null,
-  //         "company": null,
-  //         "job": null,
-  //         "dateStart": null,
-  //         "dateEnd": null
-  //       }
-  //     ],
-  //     "education": [
-  //       {
-  //         "_id": null,
-  //         "school": null,
-  //         "degree": null,
-  //         "dateStart": null,
-  //         "dateEnd": null
-  //       }
-  //     ]
-  //   }
-  // }
 })
 
 export class TeamState {
@@ -76,8 +34,33 @@ export class TeamState {
   ) {
     patchState({ ...profile });
   }
-  @Action([GetTeamProfileFailed])
+
+  @Action(UpdateTeamProfile, { cancelUncompleted: true })
+  updateTeamProfile(
+    { dispatch }: StateContext<Team>, { profile }: UpdateTeamProfile) {
+    return this.teamService.updateTeamProfile(profile).pipe(
+      tap(() => dispatch(new UpdateTeamProfileSuccess())),
+      catchError(error => dispatch(new UpdateTeamProfileFailed(error.error))
+      )
+    );
+  }
+
+  @Action(UpdateTeamProfileSuccess)
+  updateTeamProfileSuccess(
+    { patchState, dispatch }: StateContext<Team>,
+    { profile }: UpdateTeamProfile
+  ) {
+    patchState({ ...profile });
+    dispatch(new GetTeamProfile);
+  }
+
+  @Action([GetTeamProfileFailed, UpdateTeamProfileFailed])
   error({ dispatch }: StateContext<Team>, { errors }: any) {
     dispatch(new SetErrors(errors));
+  }
+
+  @Action(Logout)
+  logout({ setState }: StateContext<Team>) {
+    setState(null);
   }
 }

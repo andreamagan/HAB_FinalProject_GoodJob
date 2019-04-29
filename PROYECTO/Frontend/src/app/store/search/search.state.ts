@@ -4,6 +4,8 @@ import { tap, catchError, filter } from 'rxjs/operators';
 import { SearchSuccess, Search, SearchFailed } from './search.actions';
 import { SearchI } from 'src/app/shared/models/search.models';
 import { SetErrors } from '../error/error.actions';
+import { Logout } from '../auth/auth.actions';
+import { Player } from 'src/app/shared/models/player.models';
 
 @State<SearchI>({
   name: 'search',
@@ -23,8 +25,7 @@ export class SearchState {
   @Action(Search)
   search(
     { dispatch }: StateContext<SearchI>,
-    { keyword }: Search,
-    { collection }: Search) {
+    { keyword, collection }: Search) {
     return this.searchService.search(keyword, collection).pipe(
       tap(results => dispatch(new SearchSuccess(results))),
       catchError(error => dispatch(new SearchFailed(error.error))
@@ -48,31 +49,8 @@ export class SearchState {
     dispatch(new SetErrors(errors));
   }
 
-  // @Action(Search)
-  // searchJobs(
-  //   { dispatch }: StateContext<SearchI>,
-  //   { keyword }: Search) {
-  //   return this.searchService.searchJobs(keyword).pipe(
-  //     tap(results => dispatch(new SearchSuccess(results))),
-  //     catchError(error => dispatch(new SearchFailed(error.error))
-  //     )
-  //   );
-  // }
-
-  // @Action(SearchSuccess)
-  // searchJobsSuccess(
-  //   { patchState }: StateContext<SearchI>,
-  //   { results }: SearchSuccess) {
-  //   patchState({
-  //     searchJobs: results
-  //   });
-  // }
-
-  // @Action(SearchFailed)
-  // error(
-  //   { dispatch }: StateContext<Search>,
-  //   { errors }: any) {
-  //   dispatch(new SetErrors(errors));
-  // }
-
+  @Action(Logout)
+  logout({ setState }: StateContext<Player>) {
+    setState(null);
+  }
 }

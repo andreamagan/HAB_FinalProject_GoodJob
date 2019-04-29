@@ -1,53 +1,49 @@
-<div class="profile" *ngIf="(team$ | async) as teams">
+<div class="profile" *ngIf="(team$ | async) as team">
 
-  <div class="me">
+  <section class="basicInfo">
     <div>
       <div class="nick-animation">
-        <esn-nickanimation [nick]="team.teamInfo.shortName"> </esn-nickanimation>
-
+        <esn-nickanimation [nick]="team.profileInfo.nickName"> </esn-nickanimation>
       </div>
       <div class="avatar">
-        <esn-avatar></esn-avatar>
+        <esn-avatar [user]="team" width="200px" height="200px"></esn-avatar>
       </div>
     </div>
-  </div>
+  </section>
 
   <div class="name">
-    <p class="overline">Name</p>
-    <h6>{{team.teamInfo.fullName}}</h6>
-    <h6>{{team.teamInfo.shortName}}</h6>
+    <!-- <p class="overline">Name</p> -->
+    <h6>{{team.profileInfo.fullName}}</h6>
+    <h6>{{team.profileInfo.nickName}}</h6>
   </div>
 
   <div class="social">
     <p class="overline">Follow:</p>
-    <esn-social [social]="team.personalInfo.social"></esn-social>
+    <esn-social [social]="team.profileInfo.social"></esn-social>
   </div>
 
   <div class="description">
     <p class="overline">Description</p>
-    <p>{{team.teamInfo.description}} </p>
+    <p>{{team.profileInfo.description}} </p>
   </div>
 
-  <div class="tags">
-    <p class="overline">What we do:</p>
-    <div class="tag-list">
-      <ng-container *ngFor="let item of team.tags">
-        <esn-tags [tag]="item"></esn-tags>
-      </ng-container>
-    </div>
-  </div>
+  <section class="extendedInfo">
+    <section class="tags">
+      <h4> GOT SKILLS WE’RE LOOKING FOR?</h4>
+      <div class="tag-list">
+        <ng-container *ngFor="let item of team.tags">
+          <esn-tags [tag]="item"></esn-tags>
+        </ng-container>
+      </div>
+    </section>
 
-  <div class="background">
-    <p class="overline">Active jobs</p>
     <section class="jobs">
-      <h5> GOT SKILLS WE’RE LOOKING FOR?</h5>
+      <h4> WE ARE LOOKING FOR:</h4>
       <div class="job-list">
         <ng-container *ngFor="let job of team.jobs">
           <esn-job-card [job]="job"></esn-job-card>
         </ng-container>
       </div>
     </section>
-
-  </div>
-
+  </section>
 </div>

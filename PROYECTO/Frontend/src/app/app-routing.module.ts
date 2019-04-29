@@ -4,9 +4,8 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'welcome',
-    pathMatch: 'full',
+    path: '**',
+    component: PageNotFoundComponent
   }
 
 ];

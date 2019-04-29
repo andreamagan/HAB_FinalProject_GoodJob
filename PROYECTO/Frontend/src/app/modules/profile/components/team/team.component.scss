@@ -4,23 +4,23 @@
   margin: auto;
   justify-items: center;
   text-align: center;
-
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(7, auto);
   grid-template-areas: 
+    'nick'
     'avatar'
     'name'
     'social'
-    'tags'
     'description'
-    'background';
+    'tags'
+    'jobs';
  
 
-  .me{
-    grid-area: avatar;
-
+  .basicInfo {
+  
     .nick-animation{
+      grid-area: nick;
       width: 100vw;
       height: 120px;
       background-color: $primary;
@@ -28,45 +28,60 @@
     }
 
     .avatar{
-      transform: translateY(-40px);
+      grid-area: avatar;
+      //transform: translateY(-40px);
       height: 200px;
     }
+    
+    .name{
+      grid-area: name;
+      padding-bottom: 1rem;
+    }
+
   }
 
-  .name{
-    padding-bottom: 1rem;
-    grid-area: name;
-  }
+  .extendedInfo {
+    max-width: 800px;
 
-  .description{
-    padding: 1rem;
-    grid-area: description;
-  }
-
-  .tags{
-    padding: 1rem;
-    grid-area: tags;
-
-    .tag-list{
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+    .description{
+      padding: 1rem;
+      grid-area: description;
+    }
+  
+    .tags{
+      padding: 1rem;
+      grid-area: tags;
+  
+      .tag-list{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+    }
+  
+    .social{
+      grid-area: social;
+      padding: 1rem;
+      //display: flex;
+    }
+  
+    .overline{
+     margin: 0.5rem 0 0.25rem 0;
+    }
+  
+    .jobs{ 
+      grid-area: jobs;
+      display:block;
+     
+    
+      .job-list{
+        padding-top: 4rem;
+        display: flex;
+        flex-direction: row;
+        flex-wrap:wrap;
+        justify-content: space-around;
+    
+      }
     }
   }
-
-  .social{
-    padding: 1rem;
-    grid-area: social;
-    //display: flex;
-  }
-
-  .background{
-    padding: 1rem;
-    grid-area: background;
-  }
-
-  .overline{
-   margin: 0.5rem 0 0.25rem 0;
-  }
-
 }

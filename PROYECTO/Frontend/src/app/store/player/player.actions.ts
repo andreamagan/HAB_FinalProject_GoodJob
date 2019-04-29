@@ -23,7 +23,7 @@ export class UpdatePlayerProfile {
 
 export class UpdatePlayerProfileSuccess {
   static readonly type = '[Auth] UpdateUserProfileSuccess';
-  constructor(public profile: Player) { }
+  //Sconstructor(public profile: Player) { }
 }
 
 export class UpdatePlayerProfileFailed {

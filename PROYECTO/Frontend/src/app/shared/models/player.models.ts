@@ -1,6 +1,6 @@
 
 export interface Player {
-  personalInfo: PersonalInfo;
+  profileInfo: ProfileInfo;
   tags: any[];
   accountInfo: AccountInfo;
   avatarUrl: string;
@@ -8,7 +8,7 @@ export interface Player {
   background: Background;
 }
 
-export interface PersonalInfo {
+export interface ProfileInfo {
   social: Social;
   fullName: string;
   nickName: string;

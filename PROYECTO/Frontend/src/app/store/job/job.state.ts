@@ -1,5 +1,5 @@
 import { State, Store, Action, StateContext, Selector } from "@ngxs/store";
-import { Job, Jobs } from 'src/app/shared/models/job.model';
+import { Jobs } from 'src/app/shared/models/job.model';
 import { JobService } from 'src/app/modules/jobs/services/job.service';
 import { GetJobDetail, GetJobDetailFailed, GetJobDetailSuccess, PostJob, PostJobSuccess, PostJobFailed, GetNewJobs, GetNewJobsFailed, GetNewJobsSuccess, ApplyJob, ApplyJobSuccess, ApplyJobFailed } from './job.actions';
 import { tap, catchError } from 'rxjs/operators';
@@ -33,26 +33,58 @@ export class JobState {
 
   @Action(GetJobDetailSuccess)
   getJobDetailSuccess(
-    { patchState }: StateContext<Jobs>,
+    { patchState, getState }: StateContext<Jobs>,
     { jobDetail }: GetJobDetailSuccess,
   ) {
-    console.log(jobDetail),
-      patchState(jobDetail);
+    patchState({ jobDetail });
   }
 
-  @Action([GetJobDetailFailed, PostJobFailed, GetNewJobsFailed])
-  error({ dispatch }: StateContext<Jobs>, { errors }: any) {
-    dispatch(new SetErrors(errors));
+  @Action(GetJobDetailFailed)
+  getJobDetailFailed({ dispatch }: StateContext<Jobs>, { errors, }: any) {
+    if (errors && errors.filter(error => error.status === 404).length > 0) {
+      dispatch(new Navigate(['/page-not-found']))
+    } else {
+      dispatch(new SetErrors(errors));
+    }
   }
 
-  // @Action(GetJobDetailFailed)
-  // getJobDetailFailed({ dispatch }: StateContext<Jobs>, { errors, jobId }: any) {
-  //   if (errors && errors.filter(error => error.status === 404).length > 0) {
-  //     dispatch(new Navigate(['/page-not-found']))
-  //   } else {
-  //     dispatch(new SetErrors(errors));
-  //   }
-  // }
+  @Action(GetNewJobs)
+  getNewJobs({ dispatch }: StateContext<Jobs>) {
+    return this.jobService.getNewJobs().pipe(
+      tap(newJobs => dispatch(new GetNewJobsSuccess(newJobs))),
+      catchError(error => dispatch(new GetNewJobsFailed(error.error)))
+    );
+  }
+
+  @Action(GetNewJobsSuccess)
+  getNewJobsSuccess(
+    { patchState }: StateContext<Jobs>,
+    { newJobs }: GetNewJobsSuccess
+  ) {
+    patchState({
+      newJobs
+    })
+  }
+
+  @Action(ApplyJob, { cancelUncompleted: true })
+  applyJob(
+    { dispatch }: StateContext<Jobs>, { jobId, applicantUuid }: ApplyJob) {
+    return this.jobService.applyJob(jobId).pipe(
+      tap(() => dispatch(new ApplyJobSuccess())),
+      catchError(error => dispatch(new ApplyJobFailed(error.error)))
+    )
+  }
+
+  @Action(ApplyJobSuccess)
+  applyJobSuccess(
+    { setState, getState, patchState }: StateContext<Jobs>,
+    { jobId, applicantUuid }: ApplyJob,
+  ) {
+    console.log(applicantUuid);
+    // setState(
+    //   getState().jobDetail.applicants[applicantUuid])
+  }
+
 
   // @Action(PostJob)
   // postJob({ dispatch }: StateContext<Jobs>, { jobRequest }: PostJob) {
@@ -84,48 +116,15 @@ export class JobState {
   //   setState([job, ...getState()]);
   // }
 
-  @Action(GetNewJobs)
-  getNewJobs({ dispatch }: StateContext<Jobs>) {
-    return this.jobService.getNewJobs().pipe(
-      tap(newJobs => dispatch(new GetNewJobsSuccess(newJobs))),
-      catchError(error => dispatch(new GetNewJobsFailed(error.error)))
-    );
-  }
-
-  @Action(GetNewJobsSuccess)
-  getNewJobsSuccess(
-    { patchState }: StateContext<Jobs>,
-    { newJobs }: GetNewJobsSuccess
-  ) {
-    patchState({
-      newJobs
-    })
-  }
-
-  @Action(ApplyJob)
-  applyJob(
-    { dispatch }: StateContext<Jobs>, { jobId }: ApplyJob) {
-    return this.jobService.applyJob(jobId).pipe(
-      tap(() => dispatch(new ApplyJobSuccess())),
-      catchError(error => dispatch(new ApplyJobFailed(error.error)))
-    )
-  }
-
-  @Action(ApplyJobSuccess)
-  applyJobSuccess(
-    { patchState }: StateContext<Jobs>,
-    { newJobs }: GetNewJobsSuccess
-  ) {
-    patchState({
-      newJobs
-    })
-  }
 
   @Action(Logout)
   logout({ setState }: StateContext<Jobs>) {
-    setState({
-      jobDetail: null,
-      newJobs: [],
-    });
+    setState(null);
   }
+
+  @Action([GetJobDetailFailed, PostJobFailed, GetNewJobsFailed, ApplyJobFailed])
+  error({ dispatch }: StateContext<Jobs>, { errors }: any) {
+    dispatch(new SetErrors(errors));
+  }
+
 }

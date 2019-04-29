@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, ofAction, Actions } from '@ngxs/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Register, RegisterSuccess } from 'src/app/store/auth/auth.actions';
-
+import { MatchPasswordValidator } from 'src/app/shared/validators/match-password.validator';
 
 @Component({
   selector: 'esn-register',
@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
     'player',
     'team',
   ]
+  showMsg: boolean = false;
 
   registerForm = this.fb.group(
     {
@@ -26,10 +27,9 @@ export class RegisterComponent implements OnInit {
     },
     {
       updateOn: 'blur',
-      //validators: [MatchPasswordValidator] 
+      validators: [MatchPasswordValidator]
     }
   );
-
 
   constructor(private fb: FormBuilder, private store: Store, private actions$: Actions) { }
 
@@ -45,6 +45,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.store.dispatch(new Register(this.registerForm.value));
+    this.showMsg = true;
   }
 
   markFormGroupAsTouched(formGroup: FormGroup) {

@@ -5,8 +5,14 @@ import { WelcomePage } from './pages/welcome.page';
 const routes: Routes = [
   {
     path: 'welcome',
-    component: WelcomePage,
-  }
+    component: WelcomePage
+  },
+  {
+    path: '',
+    redirectTo: '/welcome',
+    pathMatch: 'full'
+  },
+
 ];
 
 @NgModule({

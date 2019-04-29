@@ -23,6 +23,7 @@ import { GlobalState } from './store/global.state';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { MyAccountModule } from './modules/my-account/my-account.module';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { MaterialModule } from './material/material.module';
     AuthModule,
     HomeModule,
     JobsModule,
+    MyAccountModule,
     ProfileModule,
     WelcomeModule,
     SharedModule,

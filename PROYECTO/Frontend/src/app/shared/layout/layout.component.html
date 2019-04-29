@@ -4,18 +4,25 @@
       <mat-icon>menu</mat-icon>
     </button>
     <img class="logo" src="../../../assets/good-job-logotipo-negativo.png" alt="good job logotipo" routerLink="/">
-    <esn-avatar class="header-avatar"></esn-avatar>
+    <!-- <esn-avatar [user]="currentUser" class="header-avatar"></esn-avatar> -->
   </header>
 
 
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #snav [(opened)]="opened" [mode]="mobileQuery.matches ? 'over' : 'side'"
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="51" class="nav-list">
-      <div class="me">
-        <esn-avatar></esn-avatar>
-        <p>Pepe Perez</p>
-        <h6>Nick</h6>
-      </div>
+      <!-- <div class="me">
+        <ng-container *ngIf="(auth$ | async).role === 'player'">
+          <esn-avatar [user]="player"></esn-avatar>
+          <p>{{player.profileInfo.fullName}}</p>
+          <h6>{{player.profileInfo.nickName}}</h6>
+        </ng-container>
+        <ng-container *ngIf="(auth$ | async).role === 'team'">
+          <esn-avatar [user]="team"></esn-avatar>
+          <p>{{team.profileInfo.fullName}}</p>
+          <h6>{{team.profileInfo.nickName}}</h6>
+        </ng-container>
+      </div> -->
       <mat-divider></mat-divider>
       <mat-nav-list>
         <a mat-list-item routerLink="/home" routerLinkActive="active">Home</a>

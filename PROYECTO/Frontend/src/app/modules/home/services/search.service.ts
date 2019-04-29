@@ -21,15 +21,4 @@ export class SearchService {
     }
   }
 
-  // searchJobs(text: string) {
-  //   return this.http.get<SearchI>(`${environment.apiBaseUrl}/search/jobs`, { params: { keyword: text } });
-  // }
-
-  // searchPlayers(text: string) {
-  //   return this.http.get<SearchI>(`${environment.apiBaseUrl}/search/players`, { params: { keyword: text } });
-  // }
-
-  // searchTeams(text: string) {
-  //   return this.http.get<SearchI>(`${environment.apiBaseUrl}/search/teams`, { params: { keyword: text } });
-  // }
 }

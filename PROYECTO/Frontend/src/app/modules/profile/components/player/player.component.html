@@ -3,32 +3,32 @@
   <div class="me">
     <div>
       <div class="nick-animation">
-        <esn-nickanimation [nick]="player.personalInfo.nickName"> </esn-nickanimation>
+        <esn-nickanimation [nick]="player.profileInfo.nickName"> </esn-nickanimation>
 
       </div>
       <div class="avatar">
-        <esn-avatar></esn-avatar>
+        <esn-avatar [user]="player" width="200px" height="200px"></esn-avatar>
       </div>
     </div>
   </div>
 
   <div class="name">
     <p class="overline">Name</p>
-    <h6>{{player.personalInfo.fullName}}</h6>
+    <h6>{{player.profileInfo.fullName}}</h6>
     <p class="overline">Nickname</p>
-    <h6>{{player.personalInfo.nickName}}</h6>
+    <h6>{{player.profileInfo.nickName}}</h6>
     <!-- <p class="overline">Team</p>
     <h6>{{player.team}}</h6> -->
   </div>
 
   <div class="social">
     <p class="overline">Follow:</p>
-    <esn-social [social]="player.personalInfo.social"></esn-social>
+    <esn-social [social]="player.profileInfo.social"></esn-social>
   </div>
 
   <div class="description">
     <p class="overline">Description</p>
-    <p>{{player.personalInfo.description}} </p>
+    <p>{{player.profileInfo.description}} </p>
   </div>
 
   <div class="tags">

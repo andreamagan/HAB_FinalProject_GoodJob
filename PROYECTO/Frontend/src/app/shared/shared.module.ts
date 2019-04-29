@@ -18,6 +18,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { TagsComponent } from './components/tags/tags.component';
 import { JobCardComponent } from './components/job-card/job-card.component';
 import { PlayerCardComponent } from './components/player-card/player-card.component';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PlayerCardComponent } from './components/player-card/player-card.compon
     TagsComponent,
     JobCardComponent,
     PlayerCardComponent,
+    TimeAgoPipe
   ],
   imports: [
     CommonModule,
@@ -58,6 +60,7 @@ import { PlayerCardComponent } from './components/player-card/player-card.compon
     TagsComponent,
     JobCardComponent,
     PlayerCardComponent,
+
   ]
 })
 export class SharedModule { }

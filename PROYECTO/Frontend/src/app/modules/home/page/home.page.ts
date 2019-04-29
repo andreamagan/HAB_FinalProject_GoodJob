@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { Store, Select } from '@ngxs/store';
+import { Component, Input, OnInit } from '@angular/core';
+import { Store, Select, StateContext } from '@ngxs/store';
 import { JobState } from 'src/app/store/job/job.state';
 import { Observable } from 'rxjs';
 import { Jobs } from 'src/app/shared/models/job.model';
@@ -15,7 +15,7 @@ import { SearchI } from 'src/app/shared/models/search.models';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss']
 })
-export class HomePage {
+export class HomePage implements OnInit {
   @Select(PlayerState) currentUser$: Observable<Player>;
   @Select(JobState.getNewJobs) jobs$: Observable<Jobs>;
   @Select(SearchState.search) search$: Observable<SearchI>;
@@ -25,5 +25,4 @@ export class HomePage {
   ngOnInit() {
     this.store.dispatch(new GetNewJobs());
   }
-
 }

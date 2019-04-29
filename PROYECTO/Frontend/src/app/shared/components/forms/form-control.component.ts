@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
@@ -6,6 +6,7 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'esn-form-control',
   templateUrl: './form-control.component.html',
+  styleUrls: ['./form-control.component.scss']
 })
 
 export class FormControlComponent {

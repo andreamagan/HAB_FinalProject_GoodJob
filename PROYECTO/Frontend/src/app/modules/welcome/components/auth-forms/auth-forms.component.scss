@@ -11,6 +11,8 @@
   .form-content {
    .mat-radio-group {
       margin: 0 auto;
+      color:$white;
+      font-weight: 300;
 
     //   p {
     //     width: 50px;
@@ -43,6 +45,12 @@
     color: $white;
     opacity: 0.75;
     width: 100%;
+  }
+
+  .confirm-message{
+    color: $orange;
+    font-weight: lighter;
+    padding: 1rem 0;
   }
 
   button {

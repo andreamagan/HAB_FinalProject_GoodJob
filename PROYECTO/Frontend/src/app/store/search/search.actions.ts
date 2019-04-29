@@ -1,3 +1,5 @@
+import { collections } from 'src/app/shared/models/search.models';
+
 // export class SearchJobs {
 //   static readonly type='[Search] SearchJobs';
 //   constructor(public keyword: string) {}
@@ -16,7 +18,7 @@
 
 export class Search {
   static readonly type = '[Search] Search';
-  constructor(public keyword: string, public collection?: number) { }
+  constructor(public keyword: string, public collection: collections) { }
 }
 
 export class SearchSuccess {

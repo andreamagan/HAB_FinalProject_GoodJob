@@ -4,66 +4,23 @@ import { Navigate } from '@ngxs/router-plugin';
 
 import { Player } from 'src/app/shared/models/player.models';
 import { PlayerService } from 'src/app/modules/profile/services/player.service';
-import { GetPlayerProfile, GetPlayerProfileSuccess, GetPlayerProfileFailed } from './player.actions';
+import { GetPlayerProfile, GetPlayerProfileSuccess, GetPlayerProfileFailed, UpdatePlayerProfile, UpdatePlayerProfileSuccess, UpdatePlayerProfileFailed } from './player.actions';
 import { SetErrors } from '../error/error.actions';
+import { Logout } from '../auth/auth.actions';
 
 
 @State<Player>({
   name: 'player',
-  // defaults: {
-  //   "personalInfo": {
-  //     "social": {
-  //       "twitterUrl": null,
-  //       "twichUrl": null,
-  //       "instagramUrl": null
-  //     },
-  //     "fullName": 'Default name',
-  //     "nickName": 'Default nickname',
-  //     "description": 'Default description'
-  //   },
-  //   "tags": [],
-  //   "accountInfo": {
-  //     "email": "src\assets\avatar.png",
-  //     "password": null,
-  //     "createdAt": null,
-  //     "activatedAt": null,
-  //     "verificationCode": null,
-  //     "uuid": null,
-  //     "role": null,
-  //   },
-  //   "avatarUrl": null,
-  //   "team": 'GJD',
-  //   "background": {
-  //     "experience": [
-  //       {
-  //         "_id": null,
-  //         "company": null,
-  //         "job": null,
-  //         "dateStart": null,
-  //         "dateEnd": null
-  //       }
-  //     ],
-  //     "education": [
-  //       {
-  //         "_id": null,
-  //         "school": null,
-  //         "degree": null,
-  //         "dateStart": null,
-  //         "dateEnd": null
-  //       }
-  //     ]
-  //   }
-  // }
 })
 
 export class PlayerState {
   constructor(private store: Store, private playerService: PlayerService) { }
 
   @Action(GetPlayerProfile)
-  getPlayerProfile({ dispatch }: StateContext<Player>) {
+  getPlayerProfile(
+    { dispatch }: StateContext<Player>) {
     return this.playerService.getPlayerProfile().pipe(
-      tap(profileResponse =>
-        dispatch(new GetPlayerProfileSuccess(profileResponse))
+      tap(profileResponse => dispatch(new GetPlayerProfileSuccess(profileResponse))
       ),
       catchError(error => dispatch(new GetPlayerProfileFailed(error.error))
       )
@@ -78,8 +35,34 @@ export class PlayerState {
     patchState({ ...profile });
   }
 
-  @Action([GetPlayerProfileFailed])
+  @Action(UpdatePlayerProfile, { cancelUncompleted: true })
+  updatePlayerProfile(
+    { dispatch }: StateContext<Player>, { profile }: UpdatePlayerProfile) {
+    return this.playerService.updatePlayerProfile(profile).pipe(
+      tap(() => dispatch(new UpdatePlayerProfileSuccess())),
+      catchError(error => dispatch(new UpdatePlayerProfileFailed(error.error))
+      )
+    );
+  }
+
+  @Action(UpdatePlayerProfileSuccess)
+  updatePlayerProfileSuccess(
+    { patchState, dispatch }: StateContext<Player>,
+    { profile }: UpdatePlayerProfile
+  ) {
+    patchState({ ...profile });
+    dispatch(new GetPlayerProfile);
+  }
+
+  @Action([GetPlayerProfileFailed, UpdatePlayerProfileFailed])
   error({ dispatch }: StateContext<Player>, { errors }: any) {
     dispatch(new SetErrors(errors));
   }
+
+
+  @Action(Logout)
+  logout({ setState }: StateContext<Player>) {
+    setState(null);
+  }
+
 }

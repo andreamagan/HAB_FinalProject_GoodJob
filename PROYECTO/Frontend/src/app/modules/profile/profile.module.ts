@@ -10,6 +10,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NickAnimationComponent } from './components/nick-animation/nick-animation.component';
 import { TeamComponent } from './components/team/team.component';
+import { NgxsModule } from '@ngxs/store';
+import { PlayerState } from 'src/app/store/player/player.state';
+import { TeamState } from 'src/app/store/team/team.state';
 
 
 @NgModule({
@@ -19,7 +22,8 @@ import { TeamComponent } from './components/team/team.component';
     ProfileRoutingModule,
     MaterialModule,
     SharedModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxsModule.forFeature([PlayerState, TeamState])
   ]
 })
 export class ProfileModule { }

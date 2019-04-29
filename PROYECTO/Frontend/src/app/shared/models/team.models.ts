@@ -1,5 +1,5 @@
 export interface Team {
-  teamInfo: TeamInfo;
+  profileInfo: ProfileInfo;
   tags: any[];
   players: any[];
   jobs: string[];
@@ -7,7 +7,7 @@ export interface Team {
   avatarUrl?: any;
 }
 
-export interface TeamInfo {
+export interface ProfileInfo {
   fullName: string;
   shortName: string;
   description: string;

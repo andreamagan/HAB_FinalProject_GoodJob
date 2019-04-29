@@ -1,2 +1,23 @@
-<esn-card [job]=job>
-</esn-card>
+<!-- <esn-card [job]=job>
+</esn-card> -->
+<div class="wrapper">
+
+  <div class="profile-card js-profile-card">
+    <div class="profile-card__img">
+      <img src="../../../../assets/fav-02.png" alt="profile card">
+    </div>
+
+    <div class="profile-card__cnt js-profile-cnt">
+
+      <div class="profile-card__name">{{job.title}}
+      </div>
+
+      <div *ngIf="type !== 'hide'" class="profile-card__txt">{{job.description}}</div>
+      <!-- <p class="overline"> {{job.createdAt | TimeAgo}}</p> -->
+
+      <div class="profile-card-ctr">
+        <button class="profile-card__button button--orange" (click)="navigateToDetail(job.jobId)">View Details</button>
+      </div>
+    </div>
+  </div>
+</div>

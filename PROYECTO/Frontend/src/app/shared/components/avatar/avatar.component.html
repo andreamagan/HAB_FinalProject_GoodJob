@@ -1,1 +1,9 @@
-<img [src]="avatarDefault" alt="User avatar" />
+<!-- <ng-container *ngIf="currentUser === 'player'">
+  <img [src]="(player$ | async).avatarUrl" alt="Player avatar" />
+</ng-container> -->
+
+<!-- <ng-container *ngIf="currentUser === 'team'">
+  <img [src]="(team$ | async).avatarUrl" alt="Team avatar" />
+</ng-container> -->
+
+<img *ngIf="imageUrl" [src]="imageUrl" [ngStyle]="{ width: width, height: height, 'min-width': width }" />

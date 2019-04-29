@@ -1,5 +1,5 @@
 export interface Job {
-  team: Object,
+  team: string,
   jobId: string,
   title: string,
   description: string,
@@ -18,4 +18,15 @@ export interface JobRequest {
 export interface Jobs {
   jobDetail: {},
   newJobs: [],
+}
+
+export interface JobDetail {
+  tags: string[];
+  applicants: any[];
+  team: string;
+  jobId: string;
+  title: string;
+  description: string;
+  createdAt: number;
+  deletedAt: number;
 }

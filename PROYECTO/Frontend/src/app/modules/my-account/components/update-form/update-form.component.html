@@ -1,0 +1,63 @@
+<esn-forms>
+  <esn-error></esn-error>
+  <div class="form-content">
+    <form [formGroup]="updateProfileForm" (ngSubmit)="updateProfile()">
+      <div formGroupName="profileInfo">
+        <esn-form-control [control]="updateProfileForm.get('profileInfo.fullName')">
+          <mat-form-field>
+            <input matInput placeholder="Full name" required type="text" formControlName="fullName" />
+          </mat-form-field>
+        </esn-form-control>
+
+        <esn-form-control [control]="updateProfileForm.get('profileInfo.nickName')">
+          <mat-form-field>
+            <input matInput placeholder="Nick name" required type="text" formControlName="nickName" />
+          </mat-form-field>
+        </esn-form-control>
+
+        <esn-form-control [control]="updateProfileForm.get('profileInfo.description')">
+          <mat-form-field>
+            <textarea placeholder="Description" rows="6" matInput type="text" formControlName="description"
+              snNullDefault></textarea>
+          </mat-form-field>
+        </esn-form-control>
+
+        <div formGroupName="social">
+          <esn-form-control [control]="updateProfileForm.get('profileInfo.social.twitterUrl')">
+            <mat-form-field>
+              <input matInput type="text" formControlName="twitterUrl" />
+              <mat-hint align="start">https://twitter.com/YourUserName</mat-hint>
+            </mat-form-field>
+          </esn-form-control>
+
+          <esn-form-control [control]="updateProfileForm.get('profileInfo.social.instagramUrl')">
+            <mat-form-field>
+              <input matInput type="text" formControlName="instagramUrl" />
+              <mat-hint align="start">https://instagram.com/YourUserName</mat-hint>
+            </mat-form-field>
+          </esn-form-control>
+
+          <esn-form-control [control]="updateProfileForm.get('profileInfo.social.twitchUrl')">
+            <mat-form-field>
+              <input matInput type="text" formControlName="twitchUrl" />
+              <mat-hint align="start">https://twitch.tv/YourUserName</mat-hint>
+            </mat-form-field>
+          </esn-form-control>
+
+          <esn-form-control [control]="updateProfileForm.get('profileInfo.social.webUrl')">
+            <mat-form-field>
+              <input matInput type="text" formControlName="webUrl" />
+              <mat-hint align="start">https://www.yourwebsite.com</mat-hint>
+            </mat-form-field>
+          </esn-form-control>
+        </div>
+      </div>
+      <ng-container *ngIf="showMsg">
+        <p class="confirm-message"> Updated profile!
+        </p>
+      </ng-container>
+
+      <button mat-stroked-button type="submit"> Update </button>
+    </form>
+  </div>
+</esn-forms>

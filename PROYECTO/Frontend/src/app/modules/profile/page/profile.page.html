@@ -1,6 +1,6 @@
-<ng-container ngIf*="(player$ | async).accountInfo.role === 'player'">
+<ng-container *ngIf="(auth$ | async).role === 'player'">
   <esn-player></esn-player>
 </ng-container>
-<ng-container ngIf*="(player$ | async).accountInfo.role !== 'player'">
+<ng-container *ngIf="(auth$ | async).role === 'team'">
   <esn-team></esn-team>
 </ng-container>

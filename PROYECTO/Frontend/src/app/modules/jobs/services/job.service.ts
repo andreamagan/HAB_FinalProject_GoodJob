@@ -21,20 +21,19 @@ export class JobService {
   }
 
   deleteJob(jobId: string) {
-    return this.http.put<Job>(`${environment.apiBaseUrl}/job${jobId}`, {})
+    return this.http.put<Job>(`${environment.apiBaseUrl}/job/?jobId=${jobId}`, {})
   }
 
   getJobApplicants(jobId: string) {
-    return this.http.get<Job>(`${environment.apiBaseUrl}/job/applicants${jobId}`);
+    return this.http.get<Job>(`${environment.apiBaseUrl}/job/applicants/?jobId=${jobId}`);
   }
 
   applyJob(jobId: string) {
-    return this.http.put<Job>(`${environment.apiBaseUrl}/job${jobId}`, {
+    return this.http.put<Job>(`${environment.apiBaseUrl}/job/apply/?jobId=${jobId}`, {
     });
   }
 
   getNewJobs() {
     return this.http.get<any>(`${environment.apiBaseUrl}/jobs`);
   }
-
 }

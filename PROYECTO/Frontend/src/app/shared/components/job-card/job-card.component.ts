@@ -1,17 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'esn-job-card',
   templateUrl: './job-card.component.html',
   styleUrls: ['./job-card.component.scss']
 })
-export class JobCardComponent implements OnInit {
+export class JobCardComponent {
   @Input() job;
+  @Input() type;
 
-  constructor(private store: Store) { }
+  constructor(private router: Router) { }
 
-  ngOnInit() {
+  navigateToDetail(jobId: string) {
+    this.router.navigate(['/job', jobId]);
   }
 
 }

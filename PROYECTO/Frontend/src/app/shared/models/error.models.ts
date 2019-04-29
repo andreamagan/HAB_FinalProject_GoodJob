@@ -4,7 +4,8 @@ export interface Error {
   status: string;
   code: string;
   title: string;
-  detail: string;
+  name: string;
+  message: string;
   source: {
     pointer: string;
     parameter: string;

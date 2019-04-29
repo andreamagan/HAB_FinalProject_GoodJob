@@ -3,6 +3,7 @@ import { Store } from '@ngxs/store';
 import { fromEvent } from 'rxjs';
 import { distinctUntilChanged, switchMap, debounceTime, map, filter } from 'rxjs/operators';
 import { Search, SearchSuccess } from 'src/app/store/search/search.actions';
+import { collections } from 'src/app/shared/models/search.models';
 
 @Component({
   selector: 'esn-search',
@@ -20,7 +21,10 @@ export class SearchComponent implements OnInit {
         debounceTime(300),
         map((event: any) => event.target.value),
         distinctUntilChanged(),
-        switchMap((s, c) => this.store.dispatch(new Search(s, c)))
+        switchMap((s) => {
+          console.log(s);
+          return this.store.dispatch(new Search(s, collections.jobs));
+        })
       )
       .subscribe();
   }

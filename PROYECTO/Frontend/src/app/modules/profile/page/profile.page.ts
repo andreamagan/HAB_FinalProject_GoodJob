@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Store, Select } from '@ngxs/store';
-import { PlayerState } from 'src/app/store/player/player.state';
 import { Observable } from 'rxjs';
-import { Player } from 'src/app/shared/models/player.models';
+import { AuthState } from 'src/app/store/auth/auth.state';
+import { Auth } from 'src/app/shared/models/auth.models';
 
 
 @Component({
@@ -11,7 +11,8 @@ import { Player } from 'src/app/shared/models/player.models';
   styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage {
-  @Select(PlayerState) player$: Observable<Player>;
+  @Select(AuthState) auth$: Observable<Auth>;
+
 
   constructor(private store: Store, ) {
 

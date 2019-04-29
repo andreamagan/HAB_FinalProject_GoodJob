@@ -2,7 +2,7 @@
 
   <section class="welcome" *ngIf="(currentUser$ | async) as currentUser">
     <h4>Hi! </h4>
-    <!-- <span> {{currentUser.personalInfo.fullName}}</span>! -->
+    <!-- <span> {{currentUser.profileInfo.fullName}}</span>! -->
   </section>
 
   <esn-search></esn-search>
@@ -11,7 +11,7 @@
     <h5> Show results: </h5>
     <div class="job-list">
       <ng-container *ngFor="let item of (search$ | async)">
-        <esn-job-card [job]="item"></esn-job-card>
+        <esn-job-card [job]="item" [type]="large"></esn-job-card>
       </ng-container>
     </div>
   </section>
@@ -20,7 +20,7 @@
     <h5> Last jobs</h5>
     <div class="job-list">
       <ng-container *ngFor="let job of (jobs$ | async)">
-        <esn-job-card [job]="job"></esn-job-card>
+        <esn-job-card [job]="job" [type]="large"></esn-job-card>
       </ng-container>
     </div>
   </section>

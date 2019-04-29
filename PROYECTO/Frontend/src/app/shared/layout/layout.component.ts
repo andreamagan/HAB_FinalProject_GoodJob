@@ -3,10 +3,13 @@ import { ChangeDetectorRef, Component, OnDestroy, Input } from '@angular/core';
 import { faLinkedin, faGithub, faBehance, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Store, Select } from '@ngxs/store';
 import { Logout } from 'src/app/store/auth/auth.actions';
-import { GetPlayerProfile } from 'src/app/store/player/player.actions';
 import { PlayerState } from 'src/app/store/player/player.state';
 import { Observable } from 'rxjs';
 import { Player } from '../models/player.models';
+import { TeamState } from 'src/app/store/team/team.state';
+import { Team } from '../models/team.models';
+import { AuthState } from 'src/app/store/auth/auth.state';
+import { Auth } from '../models/auth.models';
 
 
 
@@ -17,14 +20,13 @@ import { Player } from '../models/player.models';
 })
 
 export class LayoutComponent implements OnDestroy {
+  @Select(AuthState) auth$: Observable<Auth>;
+  @Select(PlayerState) player$: Observable<Player>;
+  @Select(TeamState) team$: Observable<Team>;
 
   mobileQuery: MediaQueryList;
-  // fillerNav = Array.from({ length: 5 }, (_, i) => `Nav Item ${i + 1}`);
   private _mobileQueryListener: () => void;
 
-  // @Select(PlayerState) player$: Observable<Player>;
-  // name = "";
-  // nickName = "";
 
   networks = [
     { id: 1, icon: faLinkedin, link: 'https://www.linkedin.com/in/andreamaganrey/' },
@@ -37,6 +39,7 @@ export class LayoutComponent implements OnDestroy {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
   }
 
   ngOnInit() {

@@ -10,17 +10,12 @@ div.background-img:before{
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  // -webkit-filter: blur(3px);
-  // -moz-filter: blur(3px);
-  // filter: blur(2px);
 }
 
 div.about{
   position: relative;
   z-index: 1;
   color:white;
-  //background-image: linear-gradient(60deg, $primary 0%, $secondary 100%);
-  //padding: 1rem;
 }
 
 h6{
@@ -69,7 +64,6 @@ section{
   a{
     text-decoration: none;
     line-height: 1;
-    
     position: relative;
     z-index: 0;
     display: inline-block;
