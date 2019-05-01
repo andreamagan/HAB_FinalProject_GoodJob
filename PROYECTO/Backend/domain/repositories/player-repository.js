@@ -8,6 +8,13 @@ const PlayerModel = require('../../models/player-model');
 
 const createNotFoundDataError = require('../use-cases/errors/not-found-error');
 
+
+/**
+ * Save user account data into data base
+ *
+ * @param {object} userData - User registration data
+ * @returns {object} userCreated - User account data after insert in data base
+ */
 async function insertUserAccountInDB(userData) {
   const now = new Date().toISOString().substring(0, 19).replace('T', ' ');
   const {
@@ -16,9 +23,9 @@ async function insertUserAccountInDB(userData) {
 
   const playerProfileData = {
     profileInfo: {
-      fullName: 'Your Awesome Name',
-      nickName: 'GJWP',
-      description: 'Write something about yourself...or whatever you want to say',
+      fullName: '',
+      nickName: '',
+      description: '',
       social: {
         twitterUrl: null,
         twitchUrl: null,
@@ -63,6 +70,13 @@ async function insertUserAccountInDB(userData) {
   }
 }
 
+
+/**
+ * Check if account already exist
+ *
+ * @param {string} email
+ * @returns {Object} null if everything is ok
+ */
 async function checkIfUserAccountExist(email) {
   const filter = {
     'accountInfo.email': email,
@@ -77,6 +91,12 @@ async function checkIfUserAccountExist(email) {
 }
 
 
+/**
+ * Check if the account has been verified & hasn't been activated yet
+ *
+ * @param {string} email
+ * @returns {boolean} True if everything is ok
+ */
 async function checkIfActivatedAccount(email) {
   const filter = {
     'accountInfo.email': email,
@@ -91,6 +111,14 @@ async function checkIfActivatedAccount(email) {
   return true;
 }
 
+
+/**
+ * Sets the account activation date to now
+ *
+ * @param {string} verificationCode - Verification code sent by email
+ * @param {string} email
+ * @returns {Object} null if everything is ok
+ */
 async function activateAccount(verificationCode, email) {
   const now = new Date().toISOString().substring(0, 19).replace('T', ' ');
   const filter = {
@@ -105,11 +133,19 @@ async function activateAccount(verificationCode, email) {
 
   const activatedAccount = await PlayerModel.findOneAndUpdate(filter, update);
   if (activatedAccount != null) {
-    return true;
+    return null;
   }
-  return false;
+  throw new Error('Something goes wrong');
 }
 
+
+/**
+ * Checks if given password and saved password match
+ *
+ * @param {string} email
+ * @param {string} password
+ * @returns {object} null if everything is ok
+ */
 async function checkIfCorrectPassword(email, password) {
   const filter = {
     'accountInfo.email': email,
@@ -130,6 +166,13 @@ async function checkIfCorrectPassword(email, password) {
   return null;
 }
 
+
+/**
+ * Get profile data for a specific user using email
+ *
+ * @param {string} email
+ * @returns {Object} userAccountInfo - Account information such as role, token, uuid, password...
+ */
 async function getUserAccountInfo(email) {
   const filter = {
     'accountInfo.email': email,
@@ -142,6 +185,13 @@ async function getUserAccountInfo(email) {
   return userAccountInfo;
 }
 
+
+/**
+ * Get profile data for a specific user using uuid
+ *
+ * @param {string} uuid - Unique user identifier
+ * @returns {object} profile - Complete profile data
+ */
 async function getProfile(uuid) {
   const filter = {
     'accountInfo.uuid': uuid,
@@ -156,6 +206,12 @@ async function getProfile(uuid) {
 }
 
 
+/**
+ * Get all applicant profiles for a job offer
+ *
+ * @param {Array} applicantsUuids - Unique user identifiers
+ * @returns {Array} applicantProfiles - Basic profile data for all applicants
+ */
 async function getApplicantProfile(applicantsUuids) {
   console.log('2', applicantsUuids);
   const filterApplicantsData = {
@@ -180,7 +236,9 @@ async function getApplicantProfile(applicantsUuids) {
 
 
 /**
- * @param {String} uuid
+ * Update player profile
+ *
+ * @param {String} uuid - Unique user identifier
  * @param {Object} userData data to be updated
  * @return {Object} null if everything is ok
  */
@@ -194,6 +252,30 @@ async function updateProfile(uuid, userData) {
 }
 
 
+/**
+ * Save or update user avatar url into data base
+ *
+ * @param {String} avatarUrl - url where the avatar is located
+ * @param {string} uuid - Unique user identifier
+ * @returns {Object} null if everything is ok
+ */
+function updateAvatar(avatarUrl, uuid) {
+  const filter = {
+    'accountInfo.uuid': uuid,
+  };
+
+  PlayerModel.updateOne(filter, { avatarUrl });
+  return null;
+}
+
+
+/**
+ * Add tags
+ *
+ * @param {Array} userTags - Tags selected by user
+ * @param {string} uuid - Unique user identifier
+ * @returns {Object} null if everything is ok
+ */
 async function addTags(userTags, uuid) {
   const tags = Object.values(userTags);
   const filter = {
@@ -206,6 +288,14 @@ async function addTags(userTags, uuid) {
   return null;
 }
 
+
+/**
+ * Delete tags
+ *
+ * @param {Array} userTags - Tags selected by user
+ * @param {string} uuid - Unique user identifier
+ * @returns {Object} null if everything is ok
+ */
 async function deleteTags(userTags, uuid) {
   const tags = Object.values(userTags);
 
@@ -224,6 +314,12 @@ async function deleteTags(userTags, uuid) {
 }
 
 
+/**
+ * Search player profiles by search term
+ *
+ * @param {string} keyword - search term
+ * @returns {array} players - profile results sorted by score
+ */
 async function searchPlayers(keyword) {
   const filter = {
     $text: {
@@ -239,54 +335,6 @@ async function searchPlayers(keyword) {
 
   const players = await PlayerModel.find(filter, score).sort(score).lean();
   return players;
-}
-
-const cloudName = process.env.CLOUDINARI_CLOUD_NAME;
-const apiKey = process.env.CLOUDINARI_API_KEY;
-const apiSecret = process.env.CLOUDINARI_API_SECRET;
-
-cloudinary.config({
-  cloud_name: cloudName,
-  api_key: apiKey,
-  api_secret: apiSecret,
-});
-
-
-function uploadToCloudinary(file, uuid) {
-  if (!file.buffer) {
-    throw new Error();
-  }
-
-  cloudinary.v2.uploader.upload_stream({
-    resource_type: 'raw',
-    public_id: uuid,
-    width: 200,
-    height: 200,
-    format: 'jpg',
-    crop: 'limit',
-  }, (err, result) => {
-    if (err) {
-      throw (err);
-    }
-    const {
-      secure_url: avatarUrl,
-    } = result;
-
-    const filter = {
-      'accountInfo.uuid': uuid,
-    };
-
-    PlayerModel.updateOne(filter, { avatarUrl });
-    return avatarUrl;
-  }).end(file.buffer);
-}
-
-
-async function updateAvatar(file, uuid) {
-  return new Promise((resolve, reject) => {
-    uploadToCloudinary(file, uuid, () => resolve(console.log('fue bien')));
-    reject(console.log('fue mal'));
-  });
 }
 
 module.exports = {

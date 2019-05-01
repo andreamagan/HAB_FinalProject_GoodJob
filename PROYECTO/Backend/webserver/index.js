@@ -28,14 +28,6 @@ app.use('/api', routes.teamRouter);
 app.use('/api', routes.jobRouter);
 app.use('/api', routes.searchRouter);
 
-/**
- * BORRAME
- * Middlewere para detectar errores en rutas mal conectadas
- */
-app.use('*', (req, res, next) => res.status(404).send({
-  message: 'Error en las rutas',
-}));
-
 
 app.use((err, req, res, next) => {
   if (err.name === 'ValidationError') {

@@ -4,7 +4,7 @@ const createAuthenticationError = require('../errors/authentication-error');
 const activateAccountExecutor = require('../accounts/activate-account-executor');
 
 async function activateAccountUC(verificationData) {
-  const { verificationCode, role, email } = verificationData;
+  const { verificationCode } = verificationData;
   if (!verificationCode) {
     throw createAuthenticationError('invalid verification code');
   }

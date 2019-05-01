@@ -4,6 +4,14 @@ const uuidV4 = require('uuid/v4');
 
 const JobModel = require('../../models/job-model');
 
+
+/**
+ * Create a new job
+ *
+ * @param {Object} teamProfile Team profile data 
+ * @param {Object} jobInputData 
+ * @returns {Object}
+ */
 async function postJob(teamProfile, jobInputData) {
   const now = new Date()
     .toISOString()
@@ -11,7 +19,7 @@ async function postJob(teamProfile, jobInputData) {
     .replace('T', ' ');
   const { title, description, tags } = jobInputData;
   const { nickName } = teamProfile.profileInfo;
-  const { _id } = teamProfile;
+  const { teamUuid: uuid } = teamProfile;
   const uuid = uuidV4();
   console.log('_id', _id);
 
@@ -33,6 +41,13 @@ async function postJob(teamProfile, jobInputData) {
   return jobPosted;
 }
 
+
+/**
+ *Get uuid of job applicants
+ *
+ * @param {String} jobId
+ * @returns {Array}
+ */
 async function getJobApplicantsUuids(jobId) {
   const filter = {
     jobId,
@@ -50,6 +65,12 @@ async function getJobApplicantsUuids(jobId) {
   return applicantsUuids;
 }
 
+/**
+ *
+ *
+ * @param {*} jobId
+ * @returns
+ */
 async function getJobDetail(jobId) {
   const filter = {
     jobId,

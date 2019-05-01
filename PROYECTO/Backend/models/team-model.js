@@ -2,7 +2,6 @@
 
 const mongoose = require('mongoose');
 
-
 const { Schema } = mongoose;
 
 const teamSchema = new Schema({
@@ -44,7 +43,6 @@ teamSchema.index(
     tags: 'text',
   },
 );
-
 
 const Team = mongoose.model('Team', teamSchema);
 

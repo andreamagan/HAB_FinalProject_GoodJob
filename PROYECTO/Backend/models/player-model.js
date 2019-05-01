@@ -2,7 +2,6 @@
 
 const mongoose = require('mongoose');
 
-
 const { Schema } = mongoose;
 
 const playerSchema = new Schema({
@@ -58,7 +57,6 @@ playerSchema.index(
     tags: 'text',
   },
 );
-
 
 const Player = mongoose.model('Player', playerSchema);
 
