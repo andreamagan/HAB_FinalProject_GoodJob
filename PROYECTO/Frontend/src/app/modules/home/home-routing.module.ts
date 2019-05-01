@@ -6,6 +6,7 @@ import { AuthGuard } from '../auth/services/auth.guard';
 import { ProfilePage } from '../profile/page/profile.page';
 import { JobDetailPage } from '../jobs/page/job-detail.page';
 import { MyAccountPage } from '../my-account/page/my-account.page';
+import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [

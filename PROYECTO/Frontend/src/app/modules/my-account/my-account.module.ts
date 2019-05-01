@@ -7,9 +7,11 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { MyAccountRoutingModule } from './my-account-routing.module';
 import { MyAccountPage } from './page/my-account.page';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { ChipsInputComponent } from './components/chips-input/chips-input.component';
+import { JobFormComponent } from './components/job-form/job-form.component';
 
 @NgModule({
-  declarations: [UpdateFormComponent, MyAccountPage, FileUploadComponent],
+  declarations: [UpdateFormComponent, MyAccountPage, FileUploadComponent, ChipsInputComponent, JobFormComponent],
   imports: [
     CommonModule,
     MyAccountRoutingModule,

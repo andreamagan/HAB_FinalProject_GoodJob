@@ -6,6 +6,8 @@ import { tap, catchError } from 'rxjs/operators';
 import { SetErrors } from '../error/error.actions';
 import { Navigate } from '@ngxs/router-plugin';
 import { Logout } from '../auth/auth.actions';
+import { state } from '@angular/animations';
+import { JobDetailPage } from 'src/app/modules/jobs/page/job-detail.page';
 
 @State<Jobs>({
   name: 'jobs',
@@ -80,41 +82,45 @@ export class JobState {
     { setState, getState, patchState }: StateContext<Jobs>,
     { jobId, applicantUuid }: ApplyJob,
   ) {
-    console.log(applicantUuid);
+    console.log("ApplyJobSuccess");
     // setState(
     //   getState().jobDetail.applicants[applicantUuid])
   }
 
 
-  // @Action(PostJob)
-  // postJob({ dispatch }: StateContext<Jobs>, { jobRequest }: PostJob) {
-  //   const currentUser = this.store.selectSnapshot(state => state.auth);
-  //   const team = currentUser.uuid;
+  @Action(PostJob)
+  postJob({ dispatch }: StateContext<Jobs>, { jobRequest }: PostJob) {
+    const currentUser = this.store.selectSnapshot(state => state.auth);
+    const team = currentUser.uuid;
 
-  //   return this.jobService.postJob(jobRequest.title, jobRequest.description, jobRequest.tags).pipe(
-  //     tap(job =>
-  //       dispatch(
-  //         new PostJobSuccess({
-  //           ...job,
-  //           jobId: null,
-  //           team: team,
-  //           createdAt: new Date().getTime(),
-  //           deletedAt: null,
-  //           applicants: [],
-  //         })
-  //       )
-  //     ),
-  //     catchError(error => dispatch(new PostJobFailed(error.error)))
-  //   );
-  // }
+    return this.jobService.postJob(jobRequest.title, jobRequest.description, jobRequest.tags).pipe(
+      tap(job =>
+        dispatch(
+          new PostJobSuccess({
+            ...job,
+            jobId: null,
+            team: team,
+            createdAt: new Date().getTime(),
+            deletedAt: null,
+            applicants: [],
+          })
+        )
+      ),
+      catchError(error => dispatch(new PostJobFailed(error.error)))
+    );
+  }
 
-  // @Action(PostJobSuccess)
-  // postJobSuccess(
-  //   { setState, getState }: StateContext<Jobs>,
-  //   { job }: PostJobSuccess
-  // ) {
-  //   setState([job, ...getState()]);
-  // }
+  @Action(PostJobSuccess)
+  postJobSuccess(
+    { patchState, getState }: StateContext<Jobs>,
+    { job }: PostJobSuccess
+  ) {
+    console.log("PostJobSuccess");
+    // const state = getState();
+    // patchState({
+    //   state.newJobs: [job, ...state.newJobs],
+    // });
+  }
 
 
   @Action(Logout)

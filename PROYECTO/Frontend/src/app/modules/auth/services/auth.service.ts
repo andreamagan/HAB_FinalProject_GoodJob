@@ -22,10 +22,10 @@ export class AuthService {
       .pipe(
         map(user => {
           if (user && user.accessToken) {
-            const { accessToken, uuid } = user;
+            const { accessToken } = user;
             localStorage.setItem(
               'auth',
-              JSON.stringify({ accessToken, uuid })
+              JSON.stringify({ accessToken })
             );
           }
           return user;

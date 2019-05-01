@@ -3,16 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { WelcomePage } from './pages/welcome.page';
 
 const routes: Routes = [
-  {
-    path: 'welcome',
-    component: WelcomePage
-  },
-  {
-    path: '',
-    redirectTo: '/welcome',
-    pathMatch: 'full'
-  },
-
+  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
+  { path: 'welcome', component: WelcomePage },
 ];
 
 @NgModule({

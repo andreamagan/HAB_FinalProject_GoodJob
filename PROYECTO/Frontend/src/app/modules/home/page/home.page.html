@@ -1,8 +1,10 @@
 <main class="content">
 
-  <section class="welcome" *ngIf="(currentUser$ | async) as currentUser">
-    <h4>Hi! </h4>
-    <!-- <span> {{currentUser.profileInfo.fullName}}</span>! -->
+  <section class="welcome">
+    <h4>Hi,
+      <span *ngIf="(isPlayer)">{{player.profileInfo.fullName}}</span>
+      <span *ngIf="(!isPlayer)">{{team.profileInfo.fullName}}</span>
+      ! </h4>
   </section>
 
   <esn-search></esn-search>
