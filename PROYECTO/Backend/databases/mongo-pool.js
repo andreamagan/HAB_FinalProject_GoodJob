@@ -20,3 +20,6 @@ module.exports = {
   connect: openConnection,
   disconnect,
 };
+
+
+mongodb + srv://goodjob:N8Vzr2qayX.3GYW@goodjob-mumtk.mongodb.net/test?retryWrites=true

@@ -1,7 +1,6 @@
 'use strict';
 
 const bcrypt = require('bcrypt');
-const cloudinary = require('cloudinary');
 const dot = require('dot-object');
 
 const TeamModel = require('../../models/team-model');
@@ -152,44 +151,44 @@ async function updateUserProfile(uuid, userData) {
 }
 
 
-const cloudName = process.env.CLOUDINARI_CLOUD_NAME;
-const apiKey = process.env.CLOUDINARI_API_KEY;
-const apiSecret = process.env.CLOUDINARI_API_SECRET;
+// const cloudName = process.env.CLOUDINARI_CLOUD_NAME;
+// const apiKey = process.env.CLOUDINARI_API_KEY;
+// const apiSecret = process.env.CLOUDINARI_API_SECRET;
 
-cloudinary.config({
-  cloud_name: cloudName,
-  api_key: apiKey,
-  api_secret: apiSecret,
-});
+// cloudinary.config({
+//   cloud_name: cloudName,
+//   api_key: apiKey,
+//   api_secret: apiSecret,
+// });
 
-async function updateAvatar(file, uuid) {
-  if (!file.buffer) {
-    throw new Error();
-  }
+// async function updateAvatar(file, uuid) {
+//   if (!file.buffer) {
+//     throw new Error();
+//   }
 
-  cloudinary.v2.uploader.upload_stream({
-    resource_type: 'raw',
-    public_id: uuid,
-    width: 200,
-    height: 200,
-    format: 'jpg',
-    crop: 'limit',
-  }, async(err, result) => {
-    if (err) {
-      throw err;
-    }
+//   cloudinary.v2.uploader.upload_stream({
+//     resource_type: 'raw',
+//     public_id: uuid,
+//     width: 200,
+//     height: 200,
+//     format: 'jpg',
+//     crop: 'limit',
+//   }, async(err, result) => {
+//     if (err) {
+//       throw err;
+//     }
 
-    const {
-      secure_url: avatarUrl,
-    } = result;
+//     const {
+//       secure_url: avatarUrl,
+//     } = result;
 
-    const filter = {
-      'accountInfo.uuid': uuid,
-    };
+//     const filter = {
+//       'accountInfo.uuid': uuid,
+//     };
 
-    await TeamModel.updateOne(filter, { avatarUrl });
-  }).end(file.buffer);
-}
+//     await TeamModel.updateOne(filter, { avatarUrl });
+//   }).end(file.buffer);
+// }
 
 async function postJob(uuid, jobId) {
   const filter = {
@@ -229,7 +228,7 @@ module.exports = {
   getUserAccountInfo,
   getProfile,
   updateUserProfile,
-  updateAvatar,
+  // updateAvatar,
   postJob,
   searchTeams,
 };

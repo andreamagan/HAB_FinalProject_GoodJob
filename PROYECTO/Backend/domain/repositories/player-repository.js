@@ -1,7 +1,6 @@
 'use strict';
 
 const bcrypt = require('bcrypt');
-const cloudinary = require('cloudinary');
 const dot = require('dot-object');
 
 const PlayerModel = require('../../models/player-model');
@@ -260,6 +259,7 @@ async function updateProfile(uuid, userData) {
  * @returns {Object} null if everything is ok
  */
 function updateAvatar(avatarUrl, uuid) {
+  console.log('repo', avatarUrl);
   const filter = {
     'accountInfo.uuid': uuid,
   };
